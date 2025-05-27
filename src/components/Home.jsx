@@ -1,4 +1,5 @@
 
+import About from "./About";
 import Banner from "./Banner";
 
 export default function Home() {
@@ -7,6 +8,10 @@ export default function Home() {
       {/* Banner Section Here */}
 
       <Banner></Banner>
+
+      {/* About us section */}
+
+      <About></About>
     </div>
   );
 }
