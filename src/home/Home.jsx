@@ -1,6 +1,7 @@
 
 import About from "./About";
 import Banner from "./Banner";
+import Services from "./services/Services";
 
 export default function Home() {
   return (
@@ -12,6 +13,13 @@ export default function Home() {
       {/* About us section */}
 
       <About></About>
+      
+
+      {/* Services here */}
+
+      <Services></Services>
+
+      {/*  */}
     </div>
   );
 }

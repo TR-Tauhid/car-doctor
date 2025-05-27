@@ -9,11 +9,11 @@ export default function About() {
           <img className="rounded-2xl absolute md:right-10 right-0 top-30 md:top-55 lg:top-70 lg:w-2/5 lg:h-[420px] h-3/5 border-8 border-white" src={parts} alt="parts" />
         </div>
 
-        <div className="space-y-10 lg:w-2/5">
+        <div className="space-y-10 lg:w-2/5 max-sm:pl-4">
           <h3 className="text-[#FF3811] text-xl font-bold">About Us</h3>
           <h1 className="text-3xl md:text-5xl text-black font-bold">We are qualified & of experience in this field.</h1>
 
-          <div className="font-normal text-base leading-6 space-y-4 text-stone-700">
+          <div className="font-normal text-base leading-6 max-sm:text-sm space-y-4 text-stone-700">
             <p>
               There are many variations of passages of Lorem Ipsum available,
               but the majority have suffered alteration in some form, by
