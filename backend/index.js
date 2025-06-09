@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import { MongoClient, ServerApiVersion } from "mongodb";
+import { MongoClient, ObjectId, ServerApiVersion } from "mongodb";
 
 dotenv.config();
 
@@ -33,9 +33,10 @@ async function run() {
       "Pinged your deployment. You successfully connected to MongoDB!"
     );
 
-    const database = client.db("carDoctorDatabase");
+    const database = client.db("carDoctorDB");
     const servicesCollection = database.collection("servicesCollection");
-    
+
+    // ============  Services  ===============
     app.get("/services", async (req, res) => {
       try {
         const cursor = servicesCollection.find({});
@@ -44,6 +45,23 @@ async function run() {
       } catch (err) {
         console.error("Error fetching services data: ", err);
         res.status(500).send({ message: "Failed to fetch services data." });
+      }
+    });
+
+    app.get("/checkout/:id", async (req, res) => {
+      try {
+        const { id } = req.params;
+        const result = await servicesCollection.findOne({
+          _id: new ObjectId(id),
+        });
+
+        if (!result) {
+          return res.status(404).send({ message: "Service not found" });
+        }
+        res.status(200).send(result);
+      } catch (err) {
+        console.error("Error fetching service: ", err);
+        res.status(500).send({ message: "Failed to fetch service data" });
       }
     });
   } finally {

@@ -35,8 +35,10 @@ export default function Login() {
 
   const handleGoogleBtn = () => {
     googleLogIn()
-      .then(() => {
-        notify(`Welcome ${user?.displayName}...!!!`, "success");
+      .then((res) => {
+        if (res) {
+          notify(`Welcome ${user?.displayName}...!!!`, "success");
+        }
       })
       .catch((err) => notify(`${err.message}...!!!`, "error"));
   };
@@ -73,9 +75,7 @@ export default function Login() {
   return (
     <div className="my-8">
       <div className="hero">
-
         <div className={`hero-content flex-col lg:flex-row-reverse gap-x-14`}>
-
           <div className="text-center lg:text-left">
             <h1 className="text-5xl font-bold">Login now!</h1>
             <p className="py-6">Welcome To Car Doctor...!!!</p>

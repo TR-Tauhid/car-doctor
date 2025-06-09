@@ -4,8 +4,9 @@ import Root from "../Root";
 import Home from "../home/Home";
 import Login from "../Auth/Login";
 import Register from "../Auth/Register";
-import Services from "../home/Services";
+import Services from "../home/services/Services";
 import Contact from "../components/Contact";
+import Checkout from "../components/Checkout";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
         path: "/register",
         element: <Register></Register>,
       },
+      {
+        path: "/checkout/:id",
+        element: <Checkout></Checkout>,
+      }
     ],
   },
 ]);

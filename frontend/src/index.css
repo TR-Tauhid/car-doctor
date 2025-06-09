@@ -33,6 +33,26 @@ ul > li {
   border-radius: 5px;
 }
 
+.trapezoid {
+  background: red;
+  clip-path: polygon(10% 0%, 90% 0%, 100% 100%, 0% 100%);
+}
+
+.orange-arrow {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  color: white;
+  mask-image: url('/icons/arrow.svg');
+  mask-repeat: no-repeat;
+  mask-size: contain;
+  -webkit-mask-image: url('/icons/arrow.svg');
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+}
+
+
+
 @import "tailwindcss";
 @plugin "daisyui";
 @plugin "daisyui" {

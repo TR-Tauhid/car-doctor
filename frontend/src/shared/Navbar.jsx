@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { Link, NavLink } from "react-router";
 import AuthContext from "../Context/AuthContext";
+import logoBlack from "/icons/logoBlack.svg";
+import logoWhite from "/icons/logoWhite.svg";
 
 let menuItem = (
   <>
@@ -68,13 +70,11 @@ const Navbar = () => {
             </ul>
           </div>
 
-          <object
-            data="/icons/logo.svg"
-            type="image/svg+xml"
-            className="bg-slate-200 p-1 md:p-3 rounded-xl md:rounded-3xl h-12 w-18 md:h-24 md:w-28 "
-          >
-            <img src="/icons/logo.svg" alt="Fallback icon" />
-          </object>
+          <img
+            className="p-1 md:p-3 rounded-xl md:rounded-3xl h-12 w-18"
+            src={`${theme === "light" ? logoBlack : logoWhite}`}
+            alt="Fallback icon"
+          />
         </div>
 
         <div className="navbar-center hidden lg:flex">

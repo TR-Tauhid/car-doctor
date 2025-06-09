@@ -8,7 +8,7 @@ import eyeClose from "/icons/eye-close.svg";
 export default function Register() {
   const authValue = useContext(AuthContext);
   const [toggleEye, setToggleEye] = useState(true);
-  const { notify, createUserWithEmail } = authValue;
+  const { notify, theme, createUserWithEmail } = authValue;
 
   const handleSubmitBtn = (e) => {
     e.preventDefault();
@@ -197,7 +197,11 @@ export default function Register() {
                   </div>
                   <button
                     type="submit"
-                    className="btn btn-neutral mt-4 w-full mx-auto "
+                    className={`btn btn-neutral mt-4 w-full mx-auto border-[#e5e5e5] ${
+                        theme === "light"
+                          ? "bg-white text-black"
+                          : "bg-black text-white"
+                      }`}
                   >
                     Register
                   </button>

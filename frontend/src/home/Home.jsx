@@ -1,20 +1,25 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import About from "./About";
 import Banner from "./Banner";
-import Services from "./Services";
+import Services from "./services/Services";
 import axios from "axios";
+import AuthContext from "../context/AuthContext";
 
 export default function Home() {
+  const authValue = useContext(AuthContext);
   const [services, setServices] = useState([]);
+  const { notify } = authValue;
 
   useEffect(() => {
     axios
       .get("http://localhost:5000/services")
       .then((res) => {
         setServices(res.data);
-        console.log(res.data);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        notify(`${err.message}...!!!`, "error");
+        console.log(err);
+      });
   }, []);
 
   return (
