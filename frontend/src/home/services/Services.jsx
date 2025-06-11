@@ -42,7 +42,7 @@ export default function Services({ services }) {
                 </h2>
                 <div className="card-actions  items-center justify-between text-[#ff3811] font-semibold text-xl">
                   <h3>Price: $ {service?.price}</h3>
-                  <Link to={`checkout/${service?._id}`} className="border border-orange-600 rounded-xl p-3 hover:bg-white shadow-amber-50 shadow-xs">
+                  <Link to={`/serviceDetails/${service?._id}`} className="border border-orange-600 rounded-xl p-3 hover:bg-white shadow-amber-50 shadow-xs">
                     <img src="/icons/arrow.svg" alt="arrow" />
                   </Link>
                 </div>

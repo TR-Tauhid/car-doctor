@@ -71,7 +71,7 @@ const Navbar = () => {
           </div>
 
           <img
-            className="p-1 md:p-3 rounded-xl md:rounded-3xl h-12 w-18"
+            className="p-1 md:p-3 rounded-xl md:rounded-3xl h-12 md:h-24 w-18 md:w-28"
             src={`${theme === "light" ? logoBlack : logoWhite}`}
             alt="Fallback icon"
           />

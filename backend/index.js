@@ -48,6 +48,38 @@ async function run() {
       }
     });
 
+    app.get("/serviceDetails/:id", async (req, res) => {
+      try {
+        const { id } = req.params;
+        const result = await servicesCollection.findOne({
+          _id: new ObjectId(id),
+        });
+
+        if (!result) {
+          return res.status(404).send({ message: "Service not found" });
+        }
+        res.status(200).send(result);
+      } catch (err) {
+        console.error("Error fetching service: ", err);
+        res.status(500).send({ message: "Failed to fetch service data" });
+      }
+    });
+
+    app.post("/order", async (req, res) => {
+      try {
+        const orderedData = req.body;
+        const result = await database.collection("orders").insertOne(orderedData);
+        console.log("Order placed successfully:", result);
+        res.status(201).send({result});
+      } catch (err) {
+        console.error("Error placing order: ", err);
+        res.status(500).send({
+          message: "Failed to place order",
+          error: err.message,
+        });
+      }
+    });
+
     app.get("/checkout/:id", async (req, res) => {
       try {
         const { id } = req.params;
@@ -65,8 +97,8 @@ async function run() {
       }
     });
   } finally {
-    // Ensures that the client will close when you finish/error
-    // await client.close();
+
+
   }
 }
 run().catch(console.dir);
