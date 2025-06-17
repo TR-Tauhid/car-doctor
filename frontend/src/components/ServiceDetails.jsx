@@ -29,8 +29,6 @@ const ServiceDetails = () => {
   const handleService = (service) => {
     setService(service);
   };
-  console.log(service);
-  //   console.log(services);
   return (
     <div className="w-9/12 mx-auto my-14">
       {/* Banner */}
@@ -59,7 +57,7 @@ const ServiceDetails = () => {
             <img
               className="rounded-xl w-full"
               src={`${service.img}`}
-              alt={`${service.title}`}
+              alt={`${service.title || "Service Image"}`}
             />
           </div>
 

@@ -4,7 +4,7 @@ import Navbar from "./shared/Navbar";
 import Footer from "./shared/footer";
 import { Outlet } from "react-router";
 import { ToastContainer } from 'react-toastify';
-import AuthContext from "./Context/AuthContext";
+import AuthContext from "./context/AuthContext";
 
 export default function Root() {
   const authValue = useContext(AuthContext);
@@ -12,7 +12,7 @@ export default function Root() {
   return (
     <div className={`flex flex-col min-h-screen ${theme === "light" ? "bg-emerald-50 text-black" : "bg-black text-white"}`} >
       <ToastContainer/>
-      <div className="w-full mx-auto">
+      <div className="w-full h-full mx-auto flex flex-col justify-between grow" >
         <Navbar></Navbar>
         <Outlet></Outlet>
         <Footer></Footer>

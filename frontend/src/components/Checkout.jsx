@@ -16,6 +16,7 @@ export default function Checkout() {
     const phone = form.get("phone");
     const message = form.get("message");
     const email = user?.email || form.get("email");
+    const uid = user?.uid;
 
     const orderData = {
       serviceId: id.id,
@@ -24,22 +25,21 @@ export default function Checkout() {
       phone,
       email,
       message,
+      uid,
     };
-
     axios
-      .post("http://localhost:5000/order", orderData)
-      .then((res) => {
-        if (res.statusText === "Created") {
-          console.log(res);
-          notify("Order placed successfully", "success");
+    .post("http://localhost:5000/order", orderData)
+    .then((res) => {
+      if (res.statusText === "Created") {
+        notify("Order placed successfully", "success");
           e.target.reset();
         } else {
           notify(`Failed ${res.statusText}`, "error");
         }
       })
       .catch((err) => notify(`Error: ${err.message}`, "error"));
-  };
-
+    };
+    
   return (
     <div className="w-10/12 mx-auto my-14 ">
       <section
@@ -106,6 +106,7 @@ export default function Checkout() {
           <div className="col-span-2">
             <textarea
               required
+              name="message"
               maxLength={600}
               className="textarea w-full md:text-2xl text-justify p-6 md:leading-10 min-h-fit"
               cols={30}

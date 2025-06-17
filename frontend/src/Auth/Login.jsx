@@ -3,6 +3,7 @@ import AuthContext from "../Context/AuthContext";
 import { Link } from "react-router";
 import eye from "/icons/eye.svg";
 import eyeClose from "/icons/eye-close.svg";
+import loginSVG from "/images/login/login.svg";
 import { ToastContainer } from "react-toastify";
 
 export default function Login() {
@@ -76,9 +77,8 @@ export default function Login() {
     <div className="my-8">
       <div className="hero">
         <div className={`hero-content flex-col lg:flex-row-reverse gap-x-14`}>
-          <div className="text-center lg:text-left">
-            <h1 className="text-5xl font-bold">Login now!</h1>
-            <p className="py-6">Welcome To Car Doctor...!!!</p>
+          <div className="max-sm:w-1/2 max-sm:mb-8">
+            <img src={loginSVG} alt="Login Photo" />
           </div>
 
           <div className="card w-full max-w-sm shrink-0 shadow-2xl border-2 border-slate-400 rounded-4xl">

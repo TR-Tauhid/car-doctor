@@ -65,6 +65,21 @@ async function run() {
       }
     });
 
+
+    // ============  Add Service  ===============
+    app.post("/addService", async (req, res) => {
+      try {
+        const serviceData = req.body.data;
+        const result = await servicesCollection.insertOne(serviceData);
+        res.status(201).send({ result });
+      } catch (err) {
+        console.error("Error in addService: ", err);
+        res.status(500).send({
+          message: "Failed to add service",
+          error: err.message,
+        });
+      }
+    })
     app.post("/order", async (req, res) => {
       try {
         const orderedData = req.body;

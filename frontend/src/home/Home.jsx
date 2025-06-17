@@ -4,11 +4,12 @@ import Banner from "./Banner";
 import Services from "./services/Services";
 import axios from "axios";
 import AuthContext from "../context/AuthContext";
+import Loading from "../components/Loading";
 
 export default function Home() {
   const authValue = useContext(AuthContext);
   const [services, setServices] = useState([]);
-  const { notify } = authValue;
+  const { notify, loading, theme } = authValue;
 
   useEffect(() => {
     axios
@@ -22,6 +23,9 @@ export default function Home() {
       });
   }, []);
 
+  if(loading) {
+    return <Loading theme={theme}></Loading>
+  }
   return (
     <div className="w-11/12 mx-auto">
       {/* Banner Section Here */}

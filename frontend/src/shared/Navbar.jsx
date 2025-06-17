@@ -7,19 +7,19 @@ import logoWhite from "/icons/logoWhite.svg";
 let menuItem = (
   <>
     <li>
-      <NavLink>Home</NavLink>
+      <NavLink to="/">Home</NavLink>
     </li>
     <li>
-      <NavLink>About</NavLink>
+      <NavLink to="/about">About</NavLink>
     </li>
     <li>
-      <NavLink>Services</NavLink>
+      <NavLink to="/services">Services</NavLink>
     </li>
     <li>
-      <NavLink>Blog</NavLink>
+      <NavLink to="/blogs">Blogs</NavLink>
     </li>
     <li>
-      <NavLink>Contact</NavLink>
+      <NavLink to="/contact">Contact</NavLink>
     </li>
   </>
 );
@@ -144,7 +144,7 @@ const Navbar = () => {
                       : "bg-black text-white"
                   }`}
                 >
-                  8
+                  0
                 </span>
               </div>
             </div>
@@ -154,8 +154,8 @@ const Navbar = () => {
               className="card card-compact dropdown-content  z-1 mt-3 w-52 shadow"
             >
               <div className="card-body">
-                <span className="text-lg font-bold">8 Items</span>
-                <span className="text-info">Subtotal: $999</span>
+                <span className="text-lg font-bold">0 Items</span>
+                <span className="text-info">Subtotal: $0</span>
                 <div className="card-actions">
                   <button className="btn btn-primary btn-block">
                     View cart
