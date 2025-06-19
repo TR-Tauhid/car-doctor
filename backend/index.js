@@ -65,6 +65,17 @@ async function run() {
       }
     });
 
+    // ============  Cart  ===============
+
+    app.get("/cart/:id", async (req, res) => {
+      try {
+        const { id } = req.params;
+        const result = await ordersCollection.find({ uid: id }).toArray();
+      } catch (err) {
+        console.error("Error fetching cart data: ", err);
+        res.status(500).send({ message: "Failed to fetch cart data." });
+      }
+    });
 
     // ============  Add Service  ===============
     app.post("/addService", async (req, res) => {
@@ -79,13 +90,17 @@ async function run() {
           error: err.message,
         });
       }
-    })
+    });
+
+    // ============  Add Order  ===============
     app.post("/order", async (req, res) => {
       try {
         const orderedData = req.body;
-        const result = await database.collection("orders").insertOne(orderedData);
+        const result = await database
+          .collection("ordersCollection")
+          .insertOne(orderedData);
         console.log("Order placed successfully:", result);
-        res.status(201).send({result});
+        res.status(201).send({ result });
       } catch (err) {
         console.error("Error placing order: ", err);
         res.status(500).send({
@@ -105,6 +120,7 @@ async function run() {
         if (!result) {
           return res.status(404).send({ message: "Service not found" });
         }
+
         res.status(200).send(result);
       } catch (err) {
         console.error("Error fetching service: ", err);
@@ -112,8 +128,6 @@ async function run() {
       }
     });
   } finally {
-
-
   }
 }
 run().catch(console.dir);

@@ -27,19 +27,22 @@ export default function Checkout() {
       message,
       uid,
     };
+
     axios
-    .post("http://localhost:5000/order", orderData)
-    .then((res) => {
-      if (res.statusText === "Created") {
-        notify("Order placed successfully", "success");
+      .post("http://localhost:5000/order", orderData)
+      .then((res) => {
+        if (res.statusText === "Created") {
+          notify("Order placed successfully", "success");
           e.target.reset();
         } else {
           notify(`Failed ${res.statusText}`, "error");
         }
       })
-      .catch((err) => notify(`Error: ${err.message}`, "error"));
-    };
-    
+      .catch((err) => {
+        notify(`Error: ${err.message}`, "error");
+      });
+  };
+
   return (
     <div className="w-10/12 mx-auto my-14 ">
       <section

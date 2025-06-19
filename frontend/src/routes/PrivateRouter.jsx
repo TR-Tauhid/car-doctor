@@ -1,19 +1,25 @@
-import React, { useContext } from "react";
-import AuthContext from "../context/AuthContext";
+import React, { useContext, useEffect } from "react";
 import Loading from "../components/Loading";
+import AuthContext from "../Context/AuthContext";
+import { Navigate } from "react-router";
 
 export default function PrivateRouter({ children }) {
   const authValue = useContext(AuthContext);
-  const { loading, user, theme } = authValue;
+  const { loading, user, theme, notify } = authValue;
 
-  if (loading) {
-    return <Loading theme={theme} ></Loading>;
-  }
+  useEffect(() => {
+    if (!user) {
+      notify("You must be logged in to access this route...!!!", "error");
+    }
+  }, [user, notify]);
 
   if (!user) {
-    window.location.href = "/login";
-    return null
+    return <Navigate to="/login" replace />;
   }
 
-  return <>{children}</>;
+  if (loading) {
+    return <Loading theme={theme}></Loading>;
+  }
+
+  return children;
 }

@@ -11,6 +11,8 @@ import AddService from "../components/AddService";
 import About from "../home/About";
 import Blogs from "../components/Blogs";
 import ErrorPage from "../components/ErrorPage";
+import Cart from "../components/Cart";
+import PrivateRouter from "./PrivateRouter";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -24,7 +26,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/about",
-        element: <About></About>,
+        element: (
+          <PrivateRouter>
+            <About></About>
+          </PrivateRouter>
+        ),
       },
       {
         path: "/services",
@@ -53,6 +59,10 @@ const router = createBrowserRouter([
       {
         path: "/checkout/:id",
         element: <Checkout></Checkout>,
+      },
+      {
+        path: "/cart/:id",
+        element: <Cart></Cart>,
       },
       {
         path: "/addService",

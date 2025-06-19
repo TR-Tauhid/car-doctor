@@ -1,8 +1,9 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router";
 import AuthContext from "../Context/AuthContext";
 import logoBlack from "/icons/logoBlack.svg";
 import logoWhite from "/icons/logoWhite.svg";
+import axios from "axios";
 
 let menuItem = (
   <>
@@ -27,6 +28,7 @@ let menuItem = (
 const Navbar = () => {
   const authValue = useContext(AuthContext);
   const { theme, user, notify, setTheme, logOut } = authValue;
+  const [cart, setCart] = useState([]);
 
   const handleLogOutBtn = () => {
     logOut()
@@ -38,6 +40,17 @@ const Navbar = () => {
   const toggleTheme = () => {
     setTheme(theme === "light" ? "dark" : "light");
   };
+
+  useEffect(() => {
+    user &&
+      axios
+        .get(`http://localhost:5000/cart/${user?.uid}`)
+        .then((res) => setCart(res.data))
+        .catch((err) => {
+          console.log(err);
+          notify(`Error: ${err.response.data.message}`, "error");
+        });
+  });
 
   return (
     <div className="my-6 w-11/12 mx-auto">
@@ -144,7 +157,7 @@ const Navbar = () => {
                       : "bg-black text-white"
                   }`}
                 >
-                  0
+                  {cart?.length}
                 </span>
               </div>
             </div>
@@ -154,12 +167,16 @@ const Navbar = () => {
               className="card card-compact dropdown-content  z-1 mt-3 w-52 shadow"
             >
               <div className="card-body">
-                <span className="text-lg font-bold">0 Items</span>
-                <span className="text-info">Subtotal: $0</span>
+                <span className="text-lg font-bold">
+                  {cart?.length} Item(s)
+                </span>
+                <span className="text-info">Subtotal: pending</span>
                 <div className="card-actions">
-                  <button className="btn btn-primary btn-block">
-                    View cart
-                  </button>
+                  <Link to={`/cart/${user?.uid}`}>
+                    <button className="btn btn-primary btn-block">
+                      View cart
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>
