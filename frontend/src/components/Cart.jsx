@@ -17,7 +17,7 @@ export default function Cart() {
       .catch((err) => {
         notify(`Error: ${err.response.data.message}`, "error");
       });
-  }, []);
+  }, [user?.uid, notify]);
 
   const deleteCartItem = (id) => {
     const updatedCart = cart.filter((item) => item._id != id);

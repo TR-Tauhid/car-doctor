@@ -19,7 +19,7 @@ export default function Services() {
         notify(`${err.message}...!!!`, "error");
         console.log(err);
       });
-  }, []);
+  }, [notify]);
 
   return (
     <div className="my-8 md:my-14 text-center mx-auto w-11/12">

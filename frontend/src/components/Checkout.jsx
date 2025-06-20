@@ -15,7 +15,7 @@ export default function Checkout() {
       .get(`http://localhost:5000/serviceDetails/${id.id}`)
       .then((res) => setService(res.data))
       .catch(() => notify("Faild to fetch service data...!!!", "error"));
-  }, []);
+  }, [id.id, notify]);
 
   const handleOrderFormSubmit = (e) => {
     e.preventDefault();

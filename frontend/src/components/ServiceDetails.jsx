@@ -24,7 +24,7 @@ const ServiceDetails = () => {
       .get("http://localhost:5000/services")
       .then((res) => setServices(res.data))
       .catch((err) => notify(`Error: ${err.message}`, "error"));
-  }, []);
+  }, [id.id, notify]);
 
   const handleService = (service) => {
     setService(service);
