@@ -110,6 +110,18 @@ async function run() {
       // }
     });
 
+    // =========== Delete Cart Item   =============
+
+    app.delete("/deleteCartItem/:uid", async (req, res) => {
+      const { uid } = req.params;
+      const { id } = req.body;
+      const result = await ordersCollection.deleteOne({
+        _id: new ObjectId(id),
+        uid: uid,
+      });
+      res.status(200).json({message: "Cart Item Deleted Successfully...!!!"});
+    });
+
     // ===========  Manage Orders   ==============
 
     app.get("/getOrders", async (req, res) => {
@@ -124,12 +136,17 @@ async function run() {
     app.patch("/manageOrders/:uid", async (req, res) => {
       try {
         const { uid } = req.params;
-          const { id, approvalStatus } = req.body;
-          if (uid === "68JNcuRz5Rhn9FSewm730fhaODo1") {
-          const result = await ordersCollection.updateOne({_id: new ObjectId(id)}, {$set:{ approvalStatus: approvalStatus} });
+        const { id, approvalStatus } = req.body;
+        if (uid === "68JNcuRz5Rhn9FSewm730fhaODo1") {
+          const result = await ordersCollection.updateOne(
+            { _id: new ObjectId(id) },
+            { $set: { approvalStatus: approvalStatus } }
+          );
           res.send(result);
         } else {
-          res.status(400).json({message: "You are not authorized to modify orders...!!!"})
+          res
+            .status(400)
+            .json({ message: "You are not authorized to modify orders...!!!" });
         }
       } catch {
         (err) => console.error(err);

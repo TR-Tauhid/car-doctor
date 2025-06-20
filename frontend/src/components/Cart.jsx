@@ -17,7 +17,12 @@ export default function Cart() {
       .catch((err) => {
         notify(`Error: ${err.response.data.message}`, "error");
       });
-  });
+  }, []);
+
+  const deleteCartItem = (id) => {
+    const updatedCart = cart.filter((item) => item._id != id);
+    setCart(updatedCart);
+  };
 
   return (
     <div className="w-11/12 max-sm:w-full mx-auto md:my-14">
@@ -36,18 +41,20 @@ export default function Cart() {
             <h1>Home / Cart Details</h1>
           </div>
         </div>
-
       </section>
 
-        {/* Cart Details */}
+      {/* Cart Details */}
 
       <div className="my-10">
         {cart?.length ? (
           <div>
             {cart.map((cartItem, index) => (
               <CartCard
+                deleteCartItem={deleteCartItem}
                 cartItem={cartItem}
                 theme={theme}
+                user={user}
+                notify={notify}
                 key={index}
               ></CartCard>
             ))}

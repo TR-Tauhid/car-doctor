@@ -13,7 +13,7 @@ export default function ManageOrders() {
       .get("http://localhost:5000/getOrders")
       .then((res) => setOrders(res.data))
       .catch(() => notify("Faild to fetch order data...!!!", "error"));
-  }, [notify]);
+  }, []);
 
   return (
     <div>
