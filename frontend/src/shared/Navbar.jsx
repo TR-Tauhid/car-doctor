@@ -45,7 +45,6 @@ const Navbar = () => {
     axios
       .get(`http://localhost:5000/cart/${user?.uid}`)
       .then((res) => {
-        console.log(res.data);
         setCart(res.data);
       })
       .catch((err) => {

@@ -44,9 +44,11 @@ async function run() {
         res.status(200).send(result);
       } catch (err) {
         console.error("Error fetching services data: ", err);
-        res.status(500).send({ message: "Failed to fetch services data." });
+        res.status(400).json({ message: "Failed to fetch services data." });
       }
     });
+
+    // ===========  Service Details   =============
 
     app.get("/serviceDetails/:id", async (req, res) => {
       try {
@@ -61,7 +63,7 @@ async function run() {
         res.status(200).send(result);
       } catch (err) {
         console.error("Error fetching service: ", err);
-        res.status(500).send({ message: "Failed to fetch service data" });
+        res.status(400).json({ message: "Failed to fetch service data" });
       }
     });
 
@@ -74,7 +76,7 @@ async function run() {
         res.status(201).send(result);
       } catch {
         (err) => console.error(err);
-        res.status(401).send([{ message: "Faild to fetch cart data...!!!" }]);
+        res.status(400).json({ message: "Faild to fetch cart data...!!!" });
       }
 
       // {
@@ -108,6 +110,32 @@ async function run() {
       // }
     });
 
+    // ===========  Manage Orders   ==============
+
+    app.get("/getOrders", async (req, res) => {
+      try {
+        const result = await ordersCollection.find({}).toArray();
+        res.status(201).send(result);
+      } catch {
+        (err) => res.status(401).send([{ message: err.message }]);
+      }
+    });
+
+    app.patch("/manageOrders/:uid", async (req, res) => {
+      try {
+        const { uid } = req.params;
+          const { id, approvalStatus } = req.body;
+          if (uid === "68JNcuRz5Rhn9FSewm730fhaODo1") {
+          const result = await ordersCollection.updateOne({_id: new ObjectId(id)}, {$set:{ approvalStatus: approvalStatus} });
+          res.send(result);
+        } else {
+          res.status(400).json({message: "You are not authorized to modify orders...!!!"})
+        }
+      } catch {
+        (err) => console.error(err);
+      }
+    });
+
     // ============  Add Service  ===============
 
     app.post("/addService", async (req, res) => {
@@ -117,7 +145,7 @@ async function run() {
         res.status(201).send({ result });
       } catch (err) {
         console.error("Error in addService: ", err);
-        res.status(500).send({
+        res.status(400).json({
           message: "Failed to add service",
           error: err.message,
         });
@@ -135,7 +163,7 @@ async function run() {
         res.status(201).send({ result });
       } catch (err) {
         console.error("Error placing order: ", err);
-        res.status(500).send({
+        res.status(400).json({
           message: "Failed to place order",
           error: err.message,
         });
@@ -156,7 +184,7 @@ async function run() {
         res.status(200).send(result);
       } catch (err) {
         console.error("Error fetching service: ", err);
-        res.status(500).send({ message: "Failed to fetch service data" });
+        res.status(400).json({ message: "Failed to fetch service data" });
       }
     });
   } finally {

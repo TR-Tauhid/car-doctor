@@ -13,6 +13,7 @@ import Blogs from "../components/Blogs";
 import ErrorPage from "../components/ErrorPage";
 import Cart from "../components/Cart";
 import PrivateRouter from "./PrivateRouter";
+import ManageOrders from "../components/ManageOrders";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -57,6 +58,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRouter>
             <ServiceDetails></ServiceDetails>
+          </PrivateRouter>
+        ),
+      },
+      {
+        path: "/manageOrders/",
+        element: (
+          <PrivateRouter>
+            <ManageOrders></ManageOrders>
           </PrivateRouter>
         ),
       },
