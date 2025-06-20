@@ -35,13 +35,13 @@ async function run() {
 
     const database = client.db("carDoctorDB");
     const servicesCollection = database.collection("servicesCollection");
+    const ordersCollection = database.collection("ordersCollection");
 
     // ============  Services  ===============
     app.get("/services", async (req, res) => {
       try {
-        const cursor = servicesCollection.find({});
-        const services = await cursor.toArray();
-        res.status(200).send(services);
+        const result = await servicesCollection.find({}).toArray();
+        res.status(200).send(result);
       } catch (err) {
         console.error("Error fetching services data: ", err);
         res.status(500).send({ message: "Failed to fetch services data." });
@@ -65,19 +65,51 @@ async function run() {
       }
     });
 
-    // ============  Cart  ===============
+    // ============  Cart Data  ===============
 
-    app.get("/cart/:id", async (req, res) => {
+    app.get("/cart/:uid", async (req, res) => {
       try {
-        const { id } = req.params;
-        const result = await ordersCollection.find({ uid: id }).toArray();
-      } catch (err) {
-        console.error("Error fetching cart data: ", err);
-        res.status(500).send({ message: "Failed to fetch cart data." });
+        const { uid } = req.params;
+        const result = await ordersCollection.find({ uid: uid }).toArray();
+        res.status(201).send(result);
+      } catch {
+        (err) => console.error(err);
+        res.status(401).send([{ message: "Faild to fetch cart data...!!!" }]);
       }
+
+      // {
+      //   try {
+      //     const { id } = req.params;
+      //     const cartItems = await ordersCollection.find({ uid: id }).toArray();
+
+      //     const cartItemIdSet = new Set();
+
+      //     try {
+      //       cartItems.forEach((item) => {
+      //         if (item.serviceId) {
+      //           cartItemIdSet.add(new ObjectId(item.serviceId));
+      //         }
+      //       });
+      //     } catch {
+      //       console.error("Invalid service id found in the cart item.");
+      //     }
+
+      //     const cartItemIdArray = Array.from(cartItemIdSet);
+
+      //     const result = await servicesCollection
+      //       .find({ _id: { $in: cartItemIdArray } })
+      //       .toArray();
+
+      //     res.status(201).send(result);
+      //   } catch {
+      //     (err) => console.error(err);
+      //   }
+
+      // }
     });
 
     // ============  Add Service  ===============
+
     app.post("/addService", async (req, res) => {
       try {
         const serviceData = req.body.data;
@@ -93,13 +125,13 @@ async function run() {
     });
 
     // ============  Add Order  ===============
+
     app.post("/order", async (req, res) => {
       try {
         const orderedData = req.body;
         const result = await database
           .collection("ordersCollection")
           .insertOne(orderedData);
-        console.log("Order placed successfully:", result);
         res.status(201).send({ result });
       } catch (err) {
         console.error("Error placing order: ", err);

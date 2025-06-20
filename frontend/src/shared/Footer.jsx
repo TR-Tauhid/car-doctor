@@ -7,7 +7,7 @@ export default function Footer() {
   return (
     <div>
       <footer
-        className={`footer sm:footer-horizontal text-base-content p-10 border-t-2 mx-auto border-slate-400 ${
+        className={`footer max-sm:flex sm:footer-horizontal text-base-content p-4 md:p-10 border-t-2 mx-auto border-slate-400 ${
           theme === "light" ? "bg-emerald-50 text-black" : "bg-black text-white "
         }`}
       >

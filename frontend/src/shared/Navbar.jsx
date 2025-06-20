@@ -40,17 +40,18 @@ const Navbar = () => {
   const toggleTheme = () => {
     setTheme(theme === "light" ? "dark" : "light");
   };
-
+  
   useEffect(() => {
-    user &&
-      axios
-        .get(`http://localhost:5000/cart/${user?.uid}`)
-        .then((res) => setCart(res.data))
-        .catch((err) => {
-          console.log(err);
-          notify(`Error: ${err.response.data.message}`, "error");
-        });
-  });
+    axios
+      .get(`http://localhost:5000/cart/${user?.uid}`)
+      .then((res) => {
+        console.log(res.data);
+        setCart(res.data);
+      })
+      .catch((err) => {
+        notify(`Error: ${err.response.data.message}`, "error");
+      });
+  }, [user, notify]);
 
   return (
     <div className="my-6 w-11/12 mx-auto">
@@ -94,7 +95,7 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1">{menuItem}</ul>
         </div>
 
-        <div className="navbar-end w-full md:w-auto lg:gap-x-4 justify-between items-center ">
+        <div className="navbar-end w-full max-sm:w-fit gap-x-2 md:w-auto lg:gap-x-4 justify-between items-center">
           <label className="swap swap-rotate">
             {/* this hidden checkbox controls the state */}
             <input
@@ -123,7 +124,7 @@ const Navbar = () => {
             </svg>
           </label>
 
-          <a className="border-2 p-2 bg-white md:px-7 md:py-4 c-btn max-sm:text-xs text-[#ff3811]">
+          <a className="border-2 p-2 max-sm:hidden bg-white md:px-7 md:py-4 c-btn max-sm:text-xs text-[#ff3811]">
             Appointment
           </a>
 

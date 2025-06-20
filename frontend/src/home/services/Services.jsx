@@ -1,11 +1,26 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router";
-import AuthContext from "../../context/AuthContext";
 import Loading from "../../components/Loading";
+import AuthContext from "../../Context/AuthContext";
+import axios from "axios";
 
-export default function Services({ services }) {
+export default function Services() {
+
   const authValue = useContext(AuthContext);
-  const { theme } = authValue;
+  const { theme, notify } = authValue;
+  const [services, setServices] = useState([]);
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/services")
+      .then((res) => {
+        setServices(res.data);
+      })
+      .catch((err) => {
+        notify(`${err.message}...!!!`, "error");
+        console.log(err);
+      });
+  }, []);
+
   return (
     <div className="my-8 md:my-14 text-center mx-auto w-11/12">
       <div className="space-y-8 my-8 md:my-24">

@@ -1,0 +1,54 @@
+import { MdCancel } from "react-icons/md";
+
+export default function CartCard({ cartItem, theme }) {
+  return (
+    <div>
+      <div className="border-2 border-gray-500 rounded-2xl p-2 m-3 ">
+        <table className="w-full">
+          <tbody className="p-3 ">
+            <tr className="flex max-sm:flex-col justify-around md:items-center space-y-2 ">
+              <td className="flex max-sm:flex-col mb-0 md:justify-start gap-x-4 lg:gap-x-8 md:items-center text-left ">
+                <MdCancel
+                  className={`link text-2xl max-sm:mb-3 md:text-4xl max-sm:self-end ${
+                    theme === "light" ? "text-black" : "text-white"
+                  }`}
+                />
+                <div className="w-full flex max-sm:flex-col justify-start gap-x-8 md:items-center">
+                  <img
+                    className="rounded-lg max-[640px]:w-full md:max-w-[180px] max-sm:mb-4"
+                    src={cartItem?.img}
+                    alt={cartItem?.title}
+                  />
+                  <div className="space-y-2">
+                    <h1>{cartItem?.title}</h1>
+                    <h1>Color: {cartItem?.color || "N/A"}</h1>
+                    <h1>Size: {cartItem?.size || "N/A"}</h1>
+                  </div>
+                </div>
+              </td>
+              <td className="flex md:justify-center text-base lg:text-xl items-center font-semibold md:w-1/12">
+                <h1>$ {cartItem?.price}</h1>
+              </td>
+              <td className="flex md:justify-center items-center font-medium lg:text-xl">
+                <h1>{cartItem?.orderedDate}</h1>
+              </td>
+              <td className="flex justify-center items-center">
+                <button
+                  className={`btn btn-active max-sm:w-full rounded-lg max-sm:my-4 ${
+                    (cartItem?.approvalStatus === "Pending" &&
+                      "text-white border-[#FF3811] bg-[#FF3811]") ||
+                    (cartItem?.approvalStatus === "Approved" &&
+                      " btn-success") ||
+                    (cartItem?.approvalStatus === "Denied" && "btn-error")
+                  }`}
+                >
+                  {cartItem?.approvalStatus}
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}

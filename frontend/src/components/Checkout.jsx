@@ -1,12 +1,21 @@
 import axios from "axios";
-import React, { useContext } from "react";
-import { useParams } from "react-router";
+import React, { useContext, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router";
 import AuthContext from "../Context/AuthContext";
 
 export default function Checkout() {
   const authValue = useContext(AuthContext);
   const { notify, user, theme } = authValue;
+  const [service, setService] = useState([]);
   const id = useParams();
+  const now = new Date();
+  const navigate = useNavigate();
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/serviceDetails/${id.id}`)
+      .then((res) => setService(res.data))
+      .catch(() => notify("Faild to fetch service data...!!!", "error"));
+  });
 
   const handleOrderFormSubmit = (e) => {
     e.preventDefault();
@@ -15,6 +24,11 @@ export default function Checkout() {
     const lName = form.get("lName");
     const phone = form.get("phone");
     const message = form.get("message");
+    const img = service?.img;
+    const title = service?.title;
+    const price = service?.price;
+    const orderedDate = now.toLocaleDateString();
+    const approvalStatus = "Pending";
     const email = user?.email || form.get("email");
     const uid = user?.uid;
 
@@ -25,6 +39,11 @@ export default function Checkout() {
       phone,
       email,
       message,
+      img,
+      title,
+      price,
+      orderedDate,
+      approvalStatus,
       uid,
     };
 
@@ -32,8 +51,12 @@ export default function Checkout() {
       .post("http://localhost:5000/order", orderData)
       .then((res) => {
         if (res.statusText === "Created") {
-          notify("Order placed successfully", "success");
+          notify("Order placed successfully...!!! Going back to Services.", "success");
+          setTimeout(() => {
+            navigate("/services");
+          }, 1000);
           e.target.reset();
+          window.location.reload();
         } else {
           notify(`Failed ${res.statusText}`, "error");
         }

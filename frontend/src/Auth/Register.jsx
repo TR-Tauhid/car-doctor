@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import AuthContext from "../Context/AuthContext";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { updateProfile } from "firebase/auth";
 import eye from "/icons/eye.svg";
 import loginSVG from "/images/login/login.svg";
@@ -10,6 +10,8 @@ export default function Register() {
   const authValue = useContext(AuthContext);
   const [toggleEye, setToggleEye] = useState(true);
   const { notify, theme, createUserWithEmail } = authValue;
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const handleSubmitBtn = (e) => {
     e.preventDefault();
@@ -27,6 +29,7 @@ export default function Register() {
           displayName: name,
           photoURL: photoURL,
         });
+        navigate(location?.state ? location.state.from : "/")
         notify(`Welcome ${user?.displayName}...!!!`, "success");
       })
       .catch(() => notify("Something went wrong...!!!", "error"));

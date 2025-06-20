@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import AuthContext from "../Context/AuthContext";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import eye from "/icons/eye.svg";
 import eyeClose from "/icons/eye-close.svg";
 import loginSVG from "/images/login/login.svg";
@@ -9,6 +9,8 @@ import { ToastContainer } from "react-toastify";
 export default function Login() {
   const [toggleEye, setToggleEye] = useState(true);
   const authValue = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
   const {
     theme,
     notify,
@@ -28,8 +30,11 @@ export default function Login() {
     const password = form.get("password");
 
     logInWithEmailPass(email, password)
-      .then(() => {
-        notify(`Welcome ${user?.displayName}...!!!`, "success");
+      .then((res) => {
+        if (res.user) {
+          navigate(location?.state ? location.state.from : "/");
+          notify(`Welcome ${user?.displayName}...!!!`, "success");
+        }
       })
       .catch((err) => notify(`${err.message}...!!!`, "error"));
   };
@@ -37,7 +42,8 @@ export default function Login() {
   const handleGoogleBtn = () => {
     googleLogIn()
       .then((res) => {
-        if (res) {
+        if (res.user) {
+          navigate(location?.state ? location.state.from : "/");
           notify(`Welcome ${user?.displayName}...!!!`, "success");
         }
       })
@@ -46,24 +52,33 @@ export default function Login() {
 
   const handleGithubBtn = () => {
     githubLogIn()
-      .then(() => {
-        notify(`Welcome ${user?.displayName}...!!!`, "success");
+      .then((res) => {
+        if (res.user) {
+          navigate(location?.state ? location.state.from : "/");
+          notify(`Welcome ${user?.displayName}...!!!`, "success");
+        }
       })
       .catch((err) => notify(`${err.message}...!!!`, "error"));
   };
 
   const handleFacebookBtn = () => {
     facebookLogIn()
-      .then(() => {
-        notify(`Welcome ${user?.displayName}...!!!`, "success");
+      .then((res) => {
+        if (res.user) {
+          navigate(location?.state ? location.state.from : "/");
+          notify(`Welcome ${user?.displayName}...!!!`, "success");
+        }
       })
       .catch((err) => notify(`${err.message}...!!!`, "error"));
   };
 
   const handleTwitterBtn = () => {
     twitterLogIn()
-      .then(() => {
-        notify(`Welcome ${user?.displayName}...!!!`, "success");
+      .then((res) => {
+        if (res.user) {
+          navigate(location?.state ? location.state.from : "/");
+          notify(`Welcome ${user?.displayName}...!!!`, "success");
+        }
       })
       .catch((err) => notify(`${err.message}...!!!`, "error"));
   };
@@ -178,6 +193,7 @@ export default function Login() {
                     {/* GitHub */}
                     <button
                       onClick={handleGithubBtn}
+                      type="button"
                       className={`btn border-[#e5e5e5] btn-neutral ${
                         theme === "light"
                           ? "bg-white text-black"
@@ -203,6 +219,7 @@ export default function Login() {
                     {/* Google */}
                     <button
                       onClick={handleGoogleBtn}
+                      type="button"
                       className={`btn border-[#e5e5e5] btn-neutral ${
                         theme === "light"
                           ? "bg-white text-black"
@@ -243,6 +260,7 @@ export default function Login() {
                     {/* Facebook */}
                     <button
                       onClick={handleFacebookBtn}
+                      type="button"
                       className={`btn  btn-neutral text-white border-[#e5e5e5] ${
                         theme === "light"
                           ? "bg-[#1A77F2] text-black"
@@ -267,6 +285,7 @@ export default function Login() {
                     {/* X */}
                     <button
                       onClick={handleTwitterBtn}
+                      type="button"
                       className={`btn border-[#e5e5e5] btn-neutral ${
                         theme === "light"
                           ? "bg-white text-black"

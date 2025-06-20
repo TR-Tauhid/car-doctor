@@ -1,27 +1,14 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import About from "./About";
 import Banner from "./Banner";
 import Services from "./services/Services";
-import axios from "axios";
-import AuthContext from "../context/AuthContext";
 import Loading from "../components/Loading";
+import AuthContext from "../Context/AuthContext";
 
 export default function Home() {
   const authValue = useContext(AuthContext);
-  const [services, setServices] = useState([]);
-  const { notify, loading, theme } = authValue;
+  const { loading, theme } = authValue;
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:5000/services")
-      .then((res) => {
-        setServices(res.data);
-      })
-      .catch((err) => {
-        notify(`${err.message}...!!!`, "error");
-        console.log(err);
-      });
-  }, []);
 
   if(loading) {
     return <Loading theme={theme}></Loading>
@@ -38,7 +25,7 @@ export default function Home() {
 
       {/* Services here */}
 
-      <Services services={services}></Services>
+      <Services></Services>
 
       {/*  */}
     </div>

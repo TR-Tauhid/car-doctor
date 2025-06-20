@@ -29,6 +29,7 @@ const ServiceDetails = () => {
   const handleService = (service) => {
     setService(service);
   };
+  
   return (
     <div className="w-9/12 mx-auto my-14">
       {/* Banner */}

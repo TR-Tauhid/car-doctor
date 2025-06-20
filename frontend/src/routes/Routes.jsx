@@ -54,19 +54,35 @@ const router = createBrowserRouter([
       },
       {
         path: "/ServiceDetails/:id",
-        element: <ServiceDetails></ServiceDetails>,
+        element: (
+          <PrivateRouter>
+            <ServiceDetails></ServiceDetails>
+          </PrivateRouter>
+        ),
       },
       {
         path: "/checkout/:id",
-        element: <Checkout></Checkout>,
+        element: (
+          <PrivateRouter>
+            <Checkout></Checkout>
+          </PrivateRouter>
+        ),
       },
       {
         path: "/cart/:id",
-        element: <Cart></Cart>,
+        element: (
+          <PrivateRouter>
+            <Cart></Cart>
+          </PrivateRouter>
+        ),
       },
       {
         path: "/addService",
-        element: <AddService></AddService>,
+        element: (
+          <PrivateRouter>
+            <AddService></AddService>
+          </PrivateRouter>
+        ),
       },
     ],
   },
