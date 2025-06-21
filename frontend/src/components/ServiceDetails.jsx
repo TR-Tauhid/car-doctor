@@ -251,7 +251,7 @@ const ServiceDetails = () => {
           </div>
 
           <div className="my-14">
-            <h1 className="font-bold text-4xl my-6">Price ${service.price}</h1>
+            <h1 className="font-bold text-4xl my-6">Price $ {service.price}</h1>
             <Link to={`/checkout/${service._id}`}>
               <button className="btn  border-none shadow-none w-full bg-[#FF3811] py-8 text-white rounded-lg text-lg font-semibold">
                 Proceed Checkout

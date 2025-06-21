@@ -1,7 +1,12 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import { MongoClient, ObjectId, ServerApiVersion } from "mongodb";
+import {
+  ConnectionCheckOutStartedEvent,
+  MongoClient,
+  ObjectId,
+  ServerApiVersion,
+} from "mongodb";
 
 dotenv.config();
 
@@ -108,6 +113,7 @@ async function run() {
       //   }
 
       // }
+
     });
 
     // =========== Delete Cart Item   =============
@@ -119,7 +125,19 @@ async function run() {
         _id: new ObjectId(id),
         uid: uid,
       });
-      res.status(200).json({message: "Cart Item Deleted Successfully...!!!"});
+      res.status(200).json({ message: "Cart Item Deleted Successfully...!!!" });
+    });
+
+    // =========== Delete All Cart Data   =================
+
+    app.delete("/delete-cart/:uid", async (req, res) => {
+      try {
+        const { uid } = req.params;
+        const result = await ordersCollection.deleteMany({ uid: uid });
+        res.status(201).send(result);
+      } catch {
+        (err) => res.status(401).send([{ message: err.message }]);
+      }
     });
 
     // ===========  Manage Orders   ==============

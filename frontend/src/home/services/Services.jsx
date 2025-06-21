@@ -22,7 +22,7 @@ export default function Services() {
   }, [notify]);
 
   return (
-    <div className="my-8 md:my-14 text-center mx-auto w-11/12">
+    <div className="my-8 md:my-14 text-center mx-auto">
       <div className="space-y-8 my-8 md:my-24">
         <div className=" w-full text-[#ff3811] font-semibold text-xl">
           <h1>Services</h1>
@@ -41,9 +41,9 @@ export default function Services() {
         </div>
       </div>
 
-      <div className="grid max-[830px]:grid-cols-1 max-[1300px]:grid-cols-2 min-[1301px]:grid-cols-3  gap-6 justify-self-center">
+      <div className="grid max-[1310px]:grid-cols-2 max-[1750px]:grid-cols-3 min-[1750px]:grid-cols-4 justify-items-center gap-2 min-sm:gap-10">
         {!services?.[0] ? (
-          <div className="col-span-3 flex items-center justify-center">
+          <div className="col-span-4 w-full flex items-center justify-center">
             <Loading theme={theme}></Loading>
           </div>
         ) : (
@@ -52,24 +52,24 @@ export default function Services() {
               <div
                 key={index}
                 id={service?.service_id}
-                className="card bg-[#e8e8e81a] md:w-96 shadow-sm border border-gray-200 p-6"
+                className="card min-sm:max-w-96 bg-[#e8e8e81a] shadow-sm border border-gray-200 p-2 min-sm:p-6"
               >
                 <figure>
                   <img
-                    className="rounded-xl w-full min-h-56"
+                    className="rounded-xl w-full min-sm:min-h-56"
                     src={service?.img}
                     alt={service?.title || "Service Image"}
                   />
                 </figure>
-                <div className="card-body max-sm:p-3">
-                  <h2 className="card-title font-bold text-xl md:text-2xl">
+                <div className="card-body p-2">
+                  <h2 className="card-title font-bold text-left text-sm min-sm:text-xl md:text-2xl">
                     {service?.title}
                   </h2>
-                  <div className="card-actions  items-center justify-between text-[#ff3811] font-semibold text-xl">
+                  <div className="card-actions flex items-center min-sm:items-center justify-between text-[#ff3811] font-semibold  text-xs min-sm:text-xl">
                     <h3>Price: $ {service?.price}</h3>
                     <Link
                       to={`/serviceDetails/${service?._id}`}
-                      className="border border-orange-600 rounded-xl p-3 hover:bg-white shadow-amber-50 shadow-xs"
+                      className="border border-orange-600 rounded-sm min-sm:rounded-xl p-1 min-sm:p-3 hover:bg-white shadow-amber-50 shadow-xs"
                     >
                       <img src="/icons/arrow.svg" alt="arrow" />
                     </Link>

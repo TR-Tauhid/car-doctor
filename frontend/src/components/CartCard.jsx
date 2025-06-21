@@ -1,19 +1,42 @@
-import axios from "axios";
 import { MdCancel } from "react-icons/md";
+import swal from "sweetalert";
+import axios from "axios";
 
-export default function CartCard({ cartItem, theme, user, notify, deleteCartItem }) {
+export default function CartCard({
+  cartItem,
+  theme,
+  user,
+  notify,
+  deleteCartItem,
+}) {
   const handleCrossBtn = (cartItem) => {
-    axios
-      .delete(`http://localhost:5000/deleteCartItem/${user?.uid}`, {
-        data: {
-          id: cartItem?._id,
-        },
-      })
-      .then((res) => {
-        deleteCartItem(cartItem?._id);
-        notify(res?.data?.message, "success");
-      })
-      .catch(() => notify("Something went wrong...!!!", "error"));
+    swal({
+      title: "Are you sure...???",
+      text: "You want to remove this order from your cart...???",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        swal("Your cart order has been deleted...!!!", {
+          icon: "success",
+        });
+
+        axios
+          .delete(`http://localhost:5000/deleteCartItem/${user?.uid}`, {
+            data: {
+              id: cartItem?._id,
+            },
+          })
+          .then((res) => {
+            deleteCartItem(cartItem?._id);
+            notify(res?.data?.message, "success");
+          })
+          .catch(() => notify("Something went wrong...!!!", "error"));
+      } else {
+        swal("Your order safe...!!!");
+      }
+    });
   };
 
   return (

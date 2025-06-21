@@ -19,6 +19,8 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [theme, setTheme] = useState("");
+  const [cart, setCart] = useState([]);
+
   useEffect(() => {
     const mediaQuery = window.matchMedia(`("prefers-color-scheme: dark")`);
     setTheme(mediaQuery ? "dark" : "light");
@@ -73,10 +75,14 @@ const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-      setLoading(false);
-    }, []);
+    const unsubscribe = onAuthStateChanged(
+      auth,
+      (currentUser) => {
+        setUser(currentUser);
+        setLoading(false);
+      },
+      []
+    );
 
     return () => {
       unsubscribe();
@@ -93,6 +99,8 @@ const AuthProvider = ({ children }) => {
     user,
     loading,
     setLoading,
+    cart,
+    setCart,
     createUserWithEmail,
     logInWithEmailPass,
     googleLogIn,

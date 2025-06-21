@@ -1,27 +1,58 @@
-import React, { useContext, useEffect, useState } from "react";
+import { MdArrowBack, MdDelete } from "react-icons/md";
+import React, { useContext, useEffect } from "react";
 import AuthContext from "../Context/AuthContext";
-import axios from "axios";
+import { Link } from "react-router";
 import CartCard from "./CartCard";
+import swal from "sweetalert";
+import axios from "axios";
 
 export default function Cart() {
   const authValue = useContext(AuthContext);
-  const { user, notify, theme } = authValue;
-  const [cart, setCart] = useState([]);
+  const { user, notify, theme, cart, setCart } = authValue;
   useEffect(() => {
     axios
       .get(`http://localhost:5000/cart/${user?.uid}`)
       .then((res) => {
-        console.log(res.data);
         setCart(res.data);
       })
       .catch((err) => {
-        notify(`Error: ${err.response.data.message}`, "error");
+        notify(`Error: ${err?.response?.data?.message}`, "error");
       });
-  }, [user?.uid, notify]);
+  }, [user?.uid, notify, setCart]);
 
   const deleteCartItem = (id) => {
     const updatedCart = cart.filter((item) => item._id != id);
     setCart(updatedCart);
+  };
+
+  const handleClearBtn = () => {
+    swal({
+      title: "Are you sure...???",
+      text: "You want to remove ALL orders from your cart...???",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        swal("Your cart orders have been deleted...!!!", {
+          icon: "success",
+        });
+        axios
+          .delete(`http://localhost:5000/delete-cart/${user?.uid}`)
+          .then((res) => {
+            if (res?.data?.deletedCount > 0) {
+              notify(
+                ` ${res?.data?.deletedCount} item(s) has been deleted...!!!`,
+                "success"
+              );
+              setCart([]);
+            }
+          })
+          .catch((err) => notify(`${err.message} ...!!!`, "error"));
+      } else {
+        swal("Your orders are safe...!!!");
+      }
+    });
   };
 
   return (
@@ -63,6 +94,26 @@ export default function Cart() {
           <div className="text-center font-bold tracking-wide text-5xl py-14">
             <h1> Your cart is empty </h1>
           </div>
+        )}
+      </div>
+
+      <div className="w-full flex justify-between">
+        <Link
+          to="/services"
+          className="flex justify-center items-center gap-x-2 link link-hover"
+        >
+          <MdArrowBack />
+          <h1>Conitnue Shoping</h1>
+        </Link>
+
+        {cart?.length > 0 && (
+          <Link
+            onClick={handleClearBtn}
+            className="flex justify-center items-center gap-x-2 link link-hover"
+          >
+            <MdDelete />
+            <h1>Clear Shoping Cart</h1>
+          </Link>
         )}
       </div>
     </div>

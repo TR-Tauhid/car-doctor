@@ -51,12 +51,12 @@ export default function Checkout() {
       .post("http://localhost:5000/order", orderData)
       .then((res) => {
         if (res.statusText === "Created") {
-          notify("Order placed successfully...!!! Going back to Services.", "success");
-          setTimeout(() => {
-            navigate("/services");
-          }, 1000);
+          notify(
+            "Order placed successfully...!!! Going back to Services.",
+            "success"
+          );
+          navigate("/services");
           e.target.reset();
-          window.location.reload();
         } else {
           notify(`Failed ${res.statusText}`, "error");
         }

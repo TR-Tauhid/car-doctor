@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useContext, useState } from "react";
-import { MdCancel } from "react-icons/md";
+import { MdArrowRight, MdCancel } from "react-icons/md";
 import AuthContext from "../Context/AuthContext";
 
 export default function ManageOrdersCard({ order }) {
@@ -35,9 +35,9 @@ export default function ManageOrdersCard({ order }) {
         <div className="border-2 border-gray-500 rounded-2xl p-2 m-3 ">
           <table className="w-full">
             <tbody className="p-3 ">
-              <tr className="flex max-sm:flex-col justify-around md:items-center space-y-2 ">
+              <tr className="flex max-md:flex-col justify-around md:items-center space-y-2 ">
                 <td className="flex max-sm:flex-col mb-0 md:justify-start gap-x-4 lg:gap-x-8 md:items-center text-left ">
-                  <MdCancel
+                  <MdArrowRight
                     className={`link text-2xl max-sm:mb-3 md:text-4xl max-sm:self-end ${
                       theme === "light" ? "text-black" : "text-white"
                     }`}

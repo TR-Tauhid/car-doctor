@@ -1,35 +1,96 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link, NavLink } from "react-router";
 import AuthContext from "../Context/AuthContext";
 import logoBlack from "/icons/logoBlack.svg";
 import logoWhite from "/icons/logoWhite.svg";
 import axios from "axios";
 
-let menuItem = (
-  <>
-    <li>
-      <NavLink to="/">Home</NavLink>
-    </li>
-    <li>
-      <NavLink to="/about">About</NavLink>
-    </li>
-    <li>
-      <NavLink to="/services">Services</NavLink>
-    </li>
-    <li>
-      <NavLink to="/blogs">Blogs</NavLink>
-    </li>
-    <li>
-      <NavLink to="/contact">Contact</NavLink>
-    </li>
-  </>
-);
-
 const Navbar = () => {
   const authValue = useContext(AuthContext);
-  const { theme, user, notify, setTheme, logOut } = authValue;
-  const [cart, setCart] = useState([]);
+  const { theme, user, notify, setTheme, logOut, cart, setCart } = authValue;
 
+  let menuItem = (
+    <>
+      <li>
+        <NavLink
+          className={`menu-style-unerline ${
+            theme === "light" ? "bg-after-black" : "bg-after-white"
+          }`}
+          to="/"
+        >
+          Home
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          className={`menu-style-unerline ${
+            theme === "light" ? "bg-after-black" : "bg-after-white"
+          }`}
+          to="/about"
+        >
+          About
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          className={`menu-style-unerline ${
+            theme === "light" ? "bg-after-black" : "bg-after-white"
+          }`}
+          to="/services"
+        >
+          Services
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          className={`menu-style-unerline ${
+            theme === "light" ? "bg-after-black" : "bg-after-white"
+          }`}
+          to="/blogs"
+        >
+          Blogs
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          className={`menu-style-unerline ${
+            theme === "light" ? "bg-after-black" : "bg-after-white"
+          }`}
+          to="/contact"
+        >
+          Contact
+        </NavLink>
+      </li>
+      {user?.uid === "68JNcuRz5Rhn9FSewm730fhaODo1" && (
+        <>
+          <li>
+            <NavLink
+              className={`menu-style-unerline ${
+                theme === "light"
+                  ? "bg-after-black"
+                  : "bg-after-white"
+              }`}
+              to="/manageOrders"
+            >
+              Manage Orders
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              className={`menu-style-unerline ${
+                theme === "light"
+                  ? "bg-after-black"
+                  : "bg-after-white"
+              }`}
+              to="/addService"
+            >
+              Add Service
+            </NavLink>
+          </li>
+        </>
+      )}
+    </>
+  );
   const handleLogOutBtn = () => {
     logOut()
       .then(() => {
@@ -40,7 +101,7 @@ const Navbar = () => {
   const toggleTheme = () => {
     setTheme(theme === "light" ? "dark" : "light");
   };
-  
+
   useEffect(() => {
     axios
       .get(`http://localhost:5000/cart/${user?.uid}`)
@@ -50,7 +111,7 @@ const Navbar = () => {
       .catch((err) => {
         notify(`Error: ${err.response.data.message}`, "error");
       });
-  }, [user, notify]);
+  }, [user, notify, setCart]);
 
   return (
     <div className="my-6 w-11/12 mx-auto">
@@ -77,22 +138,28 @@ const Navbar = () => {
 
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content  rounded-box z-1 mt-3 w-52 p-2 shadow"
+              className="menu menu-sm bg-blur dropdown-content rounded-box z-1 mt-3 w-52 p-2 shadow-2xs border border-white text-shadow-custom"
             >
               {menuItem}
             </ul>
           </div>
-
-          <img
-            className="p-1 md:p-3 rounded-xl md:rounded-3xl h-12 md:h-24 w-18 md:w-28"
-            src={`${theme === "light" ? logoBlack : logoWhite}`}
-            alt="Fallback icon"
-          />
+          <Link to="/">
+            <img
+              className="p-1 md:p-3 rounded-xl md:rounded-3xl h-12 md:h-24 w-18 md:min-w-28"
+              src={`${theme === "light" ? logoBlack : logoWhite}`}
+              alt="Fallback icon"
+            />
+          </Link>
         </div>
-
-        <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">{menuItem}</ul>
-        </div>
+        {user?.uid === "68JNcuRz5Rhn9FSewm730fhaODo1" ? (
+          <div className="hidden menu menu-sm lg:flex">
+            <ul className="menu menu-horizontal px-1 gap-x-5">{menuItem}</ul>
+          </div>
+        ) : (
+          <div className="navbar-center hidden lg:flex ">
+            <ul className="menu menu-horizontal px-1 ">{menuItem}</ul>
+          </div>
+        )}
 
         <div className="navbar-end w-full max-sm:w-fit gap-x-2 md:w-auto lg:gap-x-4 justify-between items-center">
           <label className="swap swap-rotate">
@@ -166,11 +233,17 @@ const Navbar = () => {
               tabIndex={0}
               className="card card-compact dropdown-content  z-1 mt-3 w-52 shadow"
             >
-              <div className="card-body">
+              <div className="card-body bg-blur rounded-xl border border-white">
                 <span className="text-lg font-bold">
                   {cart?.length} Item(s)
                 </span>
-                <span className="text-info">Subtotal: pending</span>
+                <span className="font-medium">
+                  Subtotal: ${" "}
+                  {cart.reduce(
+                    (sum, item) => sum + parseFloat(item?.price || 0),
+                    0
+                  )}{" "}
+                </span>
                 <div className="card-actions">
                   <Link to={`/cart/${user?.uid}`}>
                     <button className="btn btn-primary btn-block">
@@ -184,7 +257,12 @@ const Navbar = () => {
 
           {user ? (
             <div className="dropdown dropdown-end">
-              <div tabIndex={0} role="button" className="">
+              <div
+                tabIndex={0}
+                role="button"
+                className="tooltip tooltip-left lg:tooltip-bottom"
+                data-tip={user?.displayName}
+              >
                 <div className="avatar">
                   <div className="max-sm:w-12 w-20 rounded-full border-2 border-white">
                     <img

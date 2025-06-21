@@ -18,7 +18,7 @@ summary > ::marker {
 ul > li :hover {
   border-radius: 0%;
   font-weight: 600;
-  scale: 1.15;
+  background: none;
 }
 
 ul > li {
@@ -43,15 +43,61 @@ ul > li {
   width: 24px;
   height: 24px;
   color: white;
-  mask-image: url('/icons/arrow.svg');
+  mask-image: url("/icons/arrow.svg");
   mask-repeat: no-repeat;
   mask-size: contain;
-  -webkit-mask-image: url('/icons/arrow.svg');
+  -webkit-mask-image: url("/icons/arrow.svg");
   -webkit-mask-repeat: no-repeat;
   -webkit-mask-size: contain;
 }
 
 
+.bg-blur {
+  background-color: transparent;
+  backdrop-filter: blur(20px);
+  background-image: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.3) rgba(0, 0, 0, 0.7)
+  );
+}
+
+.text-shadow-custom {
+  text-shadow: 0px 1px 5px white;
+}
+
+/* Menu Hover Animation */
+
+.menu-style-unerline {
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 0.15em;
+  display: inline-block;
+  padding: 5px;
+  position: relative;
+}
+
+.menu-style-unerline:after {
+  background: none repeat scroll 0 0 transparent;
+  bottom: 0;
+  content: "";
+  display: block;
+  height: 2px;
+  left: 50%;
+  position: absolute;
+  transition: width 0.3s ease 0s, left 0.3s ease 0s;
+  width: 0;
+}
+.menu-style-unerline:hover:after {
+  width: 100%;
+  left: 0;
+}
+
+.bg-after-white:after {
+  background-color: #fff;
+}
+.bg-after-black:after {
+  background-color: #000;
+}
 
 @import "tailwindcss";
 @plugin "daisyui";
