@@ -20,6 +20,7 @@ const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [theme, setTheme] = useState("");
   const [cart, setCart] = useState([]);
+  const [authChecked, setAuthChecked] = useState(false);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia(`("prefers-color-scheme: dark")`);
@@ -79,11 +80,10 @@ const AuthProvider = ({ children }) => {
       auth,
       (currentUser) => {
         setUser(currentUser);
+        setAuthChecked(true);
         setLoading(false);
       },
-      []
     );
-
     return () => {
       unsubscribe();
     };
@@ -93,21 +93,22 @@ const AuthProvider = ({ children }) => {
     return signOut(auth);
   };
   const authValues = {
-    theme,
-    setTheme,
-    notify,
     user,
-    loading,
-    setLoading,
     cart,
+    theme,
+    loading,
+    authChecked,
+    notify,
+    logOut,
     setCart,
-    createUserWithEmail,
-    logInWithEmailPass,
+    setTheme,
+    setLoading,
     googleLogIn,
-    facebookLogIn,
     githubLogIn,
     twitterLogIn,
-    logOut,
+    facebookLogIn,
+    logInWithEmailPass,
+    createUserWithEmail,
   };
 
   return (

@@ -6,13 +6,13 @@ import { Navigate, useLocation } from "react-router";
 export default function PrivateRouter({ children }) {
   const location = useLocation();
   const authValue = useContext(AuthContext);
-  const { loading, user, theme, notify } = authValue;
+  const { loading, user, theme, notify, authChecked } = authValue;
 
   useEffect(() => {
-    if (!user) {
+    if (authChecked && !user) {
       notify("Please log in first...!!!", "error");
     }
-  }, [user, notify]);
+  }, [authChecked, user, notify]);
 
   if (loading) {
     return <Loading theme={theme}></Loading>;
