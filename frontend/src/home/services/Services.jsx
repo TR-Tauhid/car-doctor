@@ -71,7 +71,7 @@ export default function Services() {
                       to={`/serviceDetails/${service?._id}`}
                       className="border border-orange-600 rounded-sm min-sm:rounded-xl p-1 min-sm:p-3 hover:bg-white shadow-amber-50 shadow-xs"
                     >
-                      <img src="/icons/arrow.svg" alt="arrow" />
+                      <img className="animate-pulse" src="/icons/arrow.svg" alt="arrow" />
                     </Link>
                   </div>
                 </div>

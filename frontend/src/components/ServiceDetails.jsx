@@ -31,7 +31,7 @@ const ServiceDetails = () => {
   };
   
   return (
-    <div className="w-9/12 mx-auto my-14">
+    <div className="w-11/12 mx-auto my-14">
       {/* Banner */}
 
       <section
@@ -41,10 +41,10 @@ const ServiceDetails = () => {
         }}
       >
         <div className="h-full w-full flex flex-col items-center justify-between rounded-xl bg-linear-to-r from-[#000000f3] to-[#3d3d3d11]">
-          <div className="self-start h-full flex items-center ml-[5vw] font-bold text-5xl ">
+          <div className="self-start h-full flex items-center ml-[5vw] font-bold text-3xl min-sm:text-5xl ">
             <h1>Service Details</h1>
           </div>
-          <div className="trapezoid w-fit h-fit px-18 py-3 font-medium text-base md:text-xl text-center  flex justify-center items-center">
+          <div className="trapezoid w-fit h-fit px-5 min-sm:px-18 py-3 font-medium text-xs md:text-xl text-center flex justify-center items-center">
             <h1>Home / Service Details</h1>
           </div>
         </div>
@@ -52,8 +52,8 @@ const ServiceDetails = () => {
 
       {/* Service details  */}
 
-      <section className="flex gap-x-20 max-sm:flex-col my-14">
-        <div className="w-2/3">
+      <section className="flex max-sm:flex-col-reverse gap-x-10 lg:gap-x-20 my-14">
+        <div className="md:w-2/3">
           <div>
             <img
               className="rounded-xl w-full"
@@ -69,7 +69,7 @@ const ServiceDetails = () => {
           >
             <h1 className="font-bold text-4xl">{service.title}</h1>
             <p
-              className={`text-base leading-7 my-7 ${
+              className={`text-sm md:text-base text-justify md:leading-7 my-7 ${
                 theme === "light" ? "text-[#30285c9a]" : "text-[#e7e7e7b0]"
               }`}
             >
@@ -77,7 +77,7 @@ const ServiceDetails = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid lg:grid-cols-2 gap-6">
             {service?.facility?.map((facilityOption, index) => (
               <div
                 key={index}
@@ -87,13 +87,13 @@ const ServiceDetails = () => {
                     : "bg-[#220022] text-white"
                 } `}
               >
-                <p className="font-bold pb-4 text-xl">{facilityOption.name}</p>
+                <p className="font-bold pb-4 text-xl">{facilityOption?.name}</p>
                 <h3
                   className={`leading-8 ${
                     theme === "light" ? "text-[#4d4d4d]" : "text-white"
                   }`}
                 >
-                  {facilityOption.details}
+                  {facilityOption?.details}
                 </h3>
               </div>
             ))}
@@ -104,12 +104,12 @@ const ServiceDetails = () => {
               <h1 className="font-bold text-4xl my-8">
                 3 Simple Steps to Process
               </h1>
-              <p className="opacity-60 leading-7">{service.description}</p>
+              <p className="opacity-60 md:leading-7">{service?.description}</p>
             </div>
           </div>
 
-          <div className="flex gap-x-6 w-full justify-center ">
-            <div className=" p-8 border border-gray-400 rounded-xl space-y-5 text-center">
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 w-full justify-center ">
+            <div className="p-4 md:p-5 lg:p-8 max-w-48 border border-gray-400 rounded-xl space-y-5 text-center">
               <div className="w-fit mx-auto p-4 rounded-full bg-[#ff391138]">
                 <div className=" p-4 rounded-full bg-[#FF3811]">
                   <h1 className="text-white font-bold text-lg px-2 py-1">01</h1>
@@ -117,10 +117,11 @@ const ServiceDetails = () => {
               </div>
               <h1 className="font-bold  text-xl ">STEP ONE</h1>
               <p className="opacity-60">
-                It Uses A Dictionary <br /> Of Over 200 .
+                It Uses A Dictionary <br /> Of Over 200.
               </p>
             </div>
-            <div className=" p-8 border border-gray-400 rounded-xl space-y-5 text-center">
+
+            <div className=" p-4 md:p-5 lg:p-8 max-w-48 border border-gray-400 rounded-xl space-y-5 text-center">
               <div className="w-fit mx-auto p-4 rounded-full bg-[#ff391138]">
                 <div className=" p-4 rounded-full bg-[#FF3811]">
                   <h1 className="text-white font-bold text-lg px-2 py-1">02</h1>
@@ -128,10 +129,10 @@ const ServiceDetails = () => {
               </div>
               <h1 className="font-bold  text-xl ">STEP ONE</h1>
               <p className="opacity-60">
-                It Uses A Dictionary <br /> Of Over 200 .
+                It Uses A Dictionary <br /> Of Over 200.
               </p>
             </div>
-            <div className=" p-8 border border-gray-400 rounded-xl space-y-5 text-center">
+            <div className=" p-4 md:p-5 lg:p-8 max-w-48 border border-gray-400 rounded-xl space-y-5 text-center">
               <div className="w-fit mx-auto p-4 rounded-full bg-[#ff391138]">
                 <div className=" p-4 rounded-full bg-[#FF3811]">
                   <h1 className="text-white font-bold text-lg px-2 py-1">03</h1>
@@ -139,19 +140,19 @@ const ServiceDetails = () => {
               </div>
               <h1 className="font-bold  text-xl ">STEP ONE</h1>
               <p className="opacity-60">
-                It Uses A Dictionary <br /> Of Over 200 .
+                It Uses A Dictionary <br /> Of Over 200.
               </p>
             </div>
           </div>
 
-          <div>
+          <div className="my-14 text-center">
             <h1>Video Here</h1>
           </div>
         </div>
 
-        <div className="w-1/3">
+        <div className="md:w-1/3">
           <div
-            className={`rounded-2xl p-10 border-2 ${
+            className={`rounded-2xl p-3 md:p-5 lg:p-10 border-2 ${
               theme === "light"
                 ? "bg-[#afaef8] text-black"
                 : "bg-black text-white"
@@ -159,7 +160,7 @@ const ServiceDetails = () => {
           >
             <h1 className="text-2xl font-bold">Services</h1>
 
-            <div className="space-y-4 mt-4 ">
+            <div className="space-y-4 mt-4">
               {services?.map((service, index) => (
                 <Link
                   onClick={() => handleService(service)}
@@ -174,59 +175,60 @@ const ServiceDetails = () => {
                   <h1>{service?.title} </h1>{" "}
                   <div>
                     {" "}
-                    <img src={arrow} alt="arrow" />
+                    <img className="animate-pulse" src={arrow} alt="arrow" />
                   </div>
                 </Link>
               ))}
             </div>
           </div>
 
-          <div className="w-full  bg-black space-y-4 rounded-2xl my-14 border-2 border-white p-14">
+          <div className="w-full bg-black space-y-4 rounded-2xl my-14 border-2 border-white p-5 lg:p-14">
             <h1 className="text-white font-bold text-2xl">Download</h1>
-            <div className="flex w-full justify-between">
+            <div className="flex w-full justify-between items-center">
               <img src={document} alt="Document" />
               <div className="w-4/5 pl-5">
-                <h1 className="text-lg font-semibold text-white">Our Brochure</h1>
+                <h1 className="text-base lg:text-lg font-semibold text-white">Our Brochure</h1>
                 <p className="text-[#A2A2A2] text-base">Download</p>
               </div>
 
-              <div className="group link duration-500 flex justify-between items-center rounded-xl bg-[#FF3811] hover:bg-white p-4 ">
+              <div className="group link duration-500 flex justify-between items-center rounded-xl bg-[#FF3811] hover:bg-white h-fit p-2 lg:p-4 ">
                 <div
+                  className="orange-arrow animate-pulse w-full h-full bg-white group-hover:bg-[#FF3811] rounded-2xl"
                   src={arrow}
                   alt="Arrow"
                   role="img"
                   aria-label="Orange Arrow"
-                  className="orange-arrow w-full h-full bg-white group-hover:bg-[#FF3811] rounded-2xl"
                 ></div>
               </div>
             </div>
 
-            <div className="flex w-full justify-between">
+            <div className="flex w-full justify-between items-center">
               <img src={document} alt="Document" />
               <div className="w-4/5 pl-5">
-                <h1 className="text-lg font-semibold text-white">Company Details</h1>
+                <h1 className="text-base lg:text-lg font-semibold text-white">Company Details</h1>
                 <p className="text-[#A2A2A2] text-base">Download</p>
               </div>
 
-              <div className="group link duration-500 flex justify-between items-center rounded-xl bg-[#FF3811] hover:bg-white p-4 ">
+              <div className="group link duration-500 flex justify-between items-center rounded-xl bg-[#FF3811] hover:bg-white h-fit p-2 lg:p-4 ">
                 <div
+                  className="orange-arrow animate-pulse w-full h-full bg-white group-hover:bg-[#FF3811] rounded-2xl"
                   src={arrow}
                   alt="Arrow"
                   role="img"
                   aria-label="Orange Arrow"
-                  className="orange-arrow w-full h-full bg-white group-hover:bg-[#FF3811] rounded-2xl"
                 ></div>
               </div>
             </div>
           </div>
 
-          <div className="relative text-center border-white border-2 rounded-2xl">
+          <div className="text-center my-22 border-white border-2 rounded-2xl">
             <img src={`${
                       theme === "light"
                         ? logoBlack
                         : logoWhite
                     }`} alt="Logo" className="mx-auto my-5" />
-            <div>
+            <div className="relative">
+
               <h1 className="text-xl font-bold leading-8 w-3/5 mx-auto my-5">
                 Need Help? We Are Here To Help You
               </h1>
@@ -242,8 +244,8 @@ const ServiceDetails = () => {
                   60% off
                 </h1>
               </div>
-              <div className="w-full">
-                <button className="absolute left-1/3 -bottom-8 text-white font-semibold text-lg py-5 px-8 bg-[#FF3811] rounded-lg cursor-alias">
+              <div className="w-full absolute -bottom-8">
+                <button className=" text-white font-semibold text-lg py-5 px-8 bg-[#FF3811] rounded-lg cursor-alias">
                   Get A Quote
                 </button>
               </div>
@@ -251,14 +253,15 @@ const ServiceDetails = () => {
           </div>
 
           <div className="my-14">
-            <h1 className="font-bold text-4xl my-6">Price $ {service.price}</h1>
+            <h1 className="font-bold text-2xl text-center lg:text-4xl my-6">Price $ {service.price}</h1>
             <Link to={`/checkout/${service._id}`}>
-              <button className="btn  border-none shadow-none w-full bg-[#FF3811] py-8 text-white rounded-lg text-lg font-semibold">
+              <button className="btn border-none shadow-none w-full bg-[#FF3811] py-8 text-white rounded-lg text-lg font-semibold">
                 Proceed Checkout
               </button>
             </Link>
           </div>
         </div>
+
       </section>
     </div>
   );

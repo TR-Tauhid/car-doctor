@@ -17,15 +17,26 @@ export default function ManageOrders() {
 
   return (
     <div>
-      {orders?.map((order, index) => (
-        <ManageOrdersCard
-          order={order}
-          notify={notify}
-          user={user}
-          key={index}
-          theme={theme}
-        ></ManageOrdersCard>
-      ))}
+      {orders?.length === 0 ? (
+        <div className="text-center font-bold text-3xl leading-14">
+          <h1>
+            There are no Orders right now... <br /> Try focusing on
+            BUISNESS...!!!
+          </h1>
+        </div>
+      ) : (
+        <div>
+          {orders?.map((order, index) => (
+            <ManageOrdersCard
+              order={order}
+              notify={notify}
+              user={user}
+              key={index}
+              theme={theme}
+            ></ManageOrdersCard>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

@@ -1,0 +1,39 @@
+[
+  {
+    "title": "Car Disk Brake",
+    "price": "$500.00",
+    "rating": 5,
+    "img": "https://i.ibb.co/m5ZFqpQW/1.png"
+  },
+  {
+    "title": "Car Suspension",
+    "price": "$150.00",
+    "rating": 4,
+    "img": "https://i.ibb.co/yndGDZK5/2.png"
+  },
+  {
+    "title": "Air Filter",
+    "price": "$55.00",
+    "rating": 3,
+    "img": "https://i.ibb.co/twSFxdMJ/3.png"
+  },
+  {
+    "title": "Car Battery",
+    "price": "$300.00",
+    "rating": 4,
+    "img": "https://i.ibb.co/WWWzGF32/4.png"
+  },
+  {
+    "title": "Car Tires",
+    "price": "$100.00",
+    "rating": 5,
+    "img": "https://i.ibb.co/GQtDgTG1/5.png"
+  },
+  {
+    "title": "Car Accessories Packege",
+    "price": "$20.00",
+    "rating": 5,
+    "img": "https://i.ibb.co/jkB6BFVR/6.png"
+  }
+]
+

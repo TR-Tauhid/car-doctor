@@ -9,7 +9,7 @@ export default function About() {
           <img className="rounded-2xl absolute md:right-10 right-0 top-30 md:top-55 lg:top-70 lg:w-2/5 lg:h-[420px] h-3/5 border-8 border-white" src={parts} alt="parts" />
         </div>
 
-        <div className="space-y-10 lg:w-2/5 mt-14 hidden max-sm:pl-4">
+        <div className="space-y-10 lg:w-2/5 mt-14 max-sm:pl-4">
           <h3 className="text-[#FF3811] text-3xl font-bold">About Us</h3>
           <h1 className="text-2xl md:text-5xl font-bold">We are qualified & of experience in this field.</h1>
 
