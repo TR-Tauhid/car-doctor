@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router";
 import AuthContext from "../Context/AuthContext";
 import logoBlack from "/icons/logoBlack.svg";
@@ -6,6 +6,7 @@ import logoWhite from "/icons/logoWhite.svg";
 import axios from "axios";
 
 const Navbar = () => {
+  const [profileImgError, setProfileImgError] = useState(false);
   const authValue = useContext(AuthContext);
   const { theme, user, notify, setTheme, logOut, cart, setCart } = authValue;
 
@@ -66,9 +67,7 @@ const Navbar = () => {
           <li>
             <NavLink
               className={`menu-style-unerline ${
-                theme === "light"
-                  ? "bg-after-black"
-                  : "bg-after-white"
+                theme === "light" ? "bg-after-black" : "bg-after-white"
               }`}
               to="/manageOrders"
             >
@@ -78,9 +77,7 @@ const Navbar = () => {
           <li>
             <NavLink
               className={`menu-style-unerline ${
-                theme === "light"
-                  ? "bg-after-black"
-                  : "bg-after-white"
+                theme === "light" ? "bg-after-black" : "bg-after-white"
               }`}
               to="/addService"
             >
@@ -100,6 +97,12 @@ const Navbar = () => {
   };
   const toggleTheme = () => {
     setTheme(theme === "light" ? "dark" : "light");
+  };
+
+  const errorProfileLink =
+    "https://img.daisyui.com/images/profile/demo/batperson@192.webp";
+  const handleProfileImgError = () => {
+    setProfileImgError(true);
   };
 
   useEffect(() => {
@@ -267,10 +270,11 @@ const Navbar = () => {
                   <div className="max-sm:w-12 w-20 rounded-full border-2 border-white">
                     <img
                       src={
-                        user?.photoURL
-                          ? user?.photoURL
-                          : "https://img.daisyui.com/images/profile/demo/yellingcat@192.webp"
+                        profileImgError
+                          ? errorProfileLink
+                          : user?.photoURL || errorProfileLink
                       }
+                      onError={handleProfileImgError}
                     />
                   </div>
                 </div>
@@ -280,7 +284,10 @@ const Navbar = () => {
                 className="dropdown-content rounded-box z-1 min-w-40 hover:rounded-2xl shadow-sm"
               >
                 <li className="hover:rounded-3xl">
-                  <button onClick={handleLogOutBtn} className="btn w-full">
+                  <button
+                    onClick={handleLogOutBtn}
+                    className="btn btn-ghost bg-white text-black hover:text-white rounded-xl hover:rounded-2xl w-full"
+                  >
                     Log Out
                   </button>
                 </li>
