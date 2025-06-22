@@ -52,7 +52,7 @@ export default function Services() {
               <div
                 key={index}
                 id={service?.service_id}
-                className="card min-sm:max-w-96 bg-[#e8e8e81a] shadow-sm border border-gray-200 p-2 min-sm:p-6"
+                className="card rounded-2xl min-sm:max-w-96 bg-[#e8e8e81a] shadow-sm border border-gray-200 p-2 min-sm:p-6"
               >
                 <figure>
                   <img

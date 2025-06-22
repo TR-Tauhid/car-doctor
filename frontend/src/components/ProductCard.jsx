@@ -2,7 +2,7 @@ import shoppingBag from "/icons/shoppingBag.svg";
 
 export default function ProductCard({ product, theme }) {
   return (
-    <div className="border relative group border-[#E8E8E8] md:w-80 lg:w-96 md:h-[450px] lg:h-auto p-2 md:p-5 rounded-xl shadow-xs md:shadow-md shadow-gray-300 text-center space-y-2">
+    <div className="border relative group border-[#E8E8E8] md:w-80 lg:w-96 md:h-[450px] lg:h-auto p-2 md:p-5 rounded-xl shadow-xs md:shadow-md shadow-gray-300 text-center space-y-4">
       <div
         className={`rounded-lg w-full min-sm:h-72 ${
           theme === "light" ? "bg-[#dae2f5] " : "bg-[#1f2325] "
@@ -16,7 +16,7 @@ export default function ProductCard({ product, theme }) {
         />
       </div>
 
-      <div className="rating">
+      <div className="rating my-3">
         {[...Array(5)].map((_, index) => {
           const value = index + 1;
           return (
@@ -34,7 +34,7 @@ export default function ProductCard({ product, theme }) {
         })}
       </div>
 
-      <div>
+      <div className="space-y-3">
         <h1 className="font-bold text-lg md:text-2xl">{product?.title}</h1>
         <h1 className="font-semibold text-[#FF3811] text-sm md:text-xl">
           {product?.price}

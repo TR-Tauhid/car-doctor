@@ -11,4 +11,4 @@ Dependencies/Libraries/UI ==============
 5. Toastify
 6. DaisyUi
 7. Tailwind
-8. 
+8. Swiper slider

@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 
+
 * {
   font-family: "Inter", sans-serif;
   font-optical-sizing: auto;
@@ -51,6 +52,25 @@ ul > li {
   -webkit-mask-size: contain;
 }
 
+/* Swiper Slider  */
+.swiper-slide {
+  width: auto !important;
+}
+
+.insta-bg {
+  background: linear-gradient(
+    to right,
+    #774adf 4%,
+    #9748be 15%,
+    #bd4697 30%,
+    #d8447a 45%,
+    #e94369 57%,
+    #ef4363 66%,
+    #ef545e 72%,
+    #f08053 84%,
+    #f2c141 100%
+  );
+}
 
 .bg-blur {
   background-color: transparent;
