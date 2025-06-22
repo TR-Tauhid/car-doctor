@@ -7,6 +7,8 @@ import AuthContext from "../Context/AuthContext";
 import ContactCard from "./ContactCard";
 import PopularProducts from "./PopularProducts";
 import Team from "../components/Team";
+import Features from "../components/Features";
+import Testimonial from "../components/Testimonial";
 
 export default function Home() {
   const authValue = useContext(AuthContext);
@@ -41,7 +43,13 @@ export default function Home() {
 
       <Team />
 
-      
+      {/* Core Features */}
+
+      <Features />
+
+      {/* Testimonial */}
+
+      <Testimonial />
     </div>
   );
 }

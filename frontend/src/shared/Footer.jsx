@@ -45,7 +45,7 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="leading-10">
+          <div className="leading-6 md:leading-10">
             <h1 className="font-semibold text-xl mb-5">About</h1>
 
             <Link to="/">
@@ -58,7 +58,7 @@ export default function Footer() {
               <p>Contact</p>
             </Link>
           </div>
-          <div className="leading-10">
+          <div className="leading-6 md:leading-10">
             <h1 className="font-semibold text-xl mb-5">Company</h1>
             <Link to="#">
               <p>Why Car Doctor</p>
@@ -67,7 +67,7 @@ export default function Footer() {
               <p>About</p>
             </Link>
           </div>
-          <div className="leading-10">
+          <div className="leading-6 md:leading-10">
             <h1 className="font-semibold text-xl mb-5">Support</h1>
 
             <Link to="#">
