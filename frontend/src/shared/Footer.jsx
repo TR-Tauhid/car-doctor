@@ -29,7 +29,7 @@ export default function Footer() {
                 coach trainer who is also a serial .
               </p>
             </div>
-            <div className="flex gap-x-2 my-5 text-md">
+            <div className="flex gap-x-2 my-5 text-base">
               <div className="link rounded-full h-9 w-9 flex justify-between items-center bg-[#9997a542] ">
                 <FaGoogle className="grow" />
               </div>

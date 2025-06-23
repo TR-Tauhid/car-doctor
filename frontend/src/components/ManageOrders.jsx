@@ -25,16 +25,23 @@ export default function ManageOrders() {
           </h1>
         </div>
       ) : (
-        <div>
-          {orders?.map((order, index) => (
-            <ManageOrdersCard
-              order={order}
-              notify={notify}
-              user={user}
-              key={index}
-              theme={theme}
-            ></ManageOrdersCard>
-          ))}
+        <div className="my-14 w-11/12 mx-auto">
+          <div className="w-full text-center font-bold text-3xl mb-10">
+            <h1>Manage Orders of customers.</h1>
+          </div>
+          <table className="w-full">
+            <tbody className="p-3 flex lg:flex-col gap-y-5">
+              {orders?.map((order, index) => (
+                <ManageOrdersCard
+                  order={order}
+                  notify={notify}
+                  user={user}
+                  key={index}
+                  theme={theme}
+                ></ManageOrdersCard>
+              ))}
+            </tbody>
+          </table>
         </div>
       )}
     </div>
