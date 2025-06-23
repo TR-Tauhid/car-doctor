@@ -1,6 +1,7 @@
 ==================      BACKLOGS        ==================
-1. Add themes.
-2. 
+1. Add Dynamic title. 
+2. Add Icon on the tab.
+3. 
 
 
 Dependencies/Libraries/UI ==============

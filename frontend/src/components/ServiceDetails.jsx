@@ -8,28 +8,30 @@ import logoWhite from "/icons/logoWhite.svg";
 import logoBlack from "/icons/logoBlack.svg";
 
 const ServiceDetails = () => {
-  const authValue = useContext(AuthContext);
-  const { notify, theme } = authValue;
   const [service, setService] = useState([]);
   const [services, setServices] = useState([]);
+  const authValue = useContext(AuthContext);
+  const { theme, notify } = authValue;
   const id = useParams();
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/serviceDetails/${id.id}`)
+      .get(`http://localhost:5000/serviceDetails/${id?.id}`)
       .then((res) => setService(res.data))
       .catch((err) => notify(`Error: ${err.message}`, "error"));
 
     axios
       .get("http://localhost:5000/services")
-      .then((res) => setServices(res.data))
+      .then((res) => {
+        setServices(res.data);
+      })
       .catch((err) => notify(`Error: ${err.message}`, "error"));
-  }, [id.id, notify]);
+  }, [id, notify]);
 
   const handleService = (service) => {
     setService(service);
   };
-  
+
   return (
     <div className="w-11/12 mx-auto my-14">
       {/* Banner */}
@@ -187,7 +189,9 @@ const ServiceDetails = () => {
             <div className="flex w-full justify-between items-center">
               <img src={document} alt="Document" />
               <div className="w-4/5 pl-5">
-                <h1 className="text-base lg:text-lg font-semibold text-white">Our Brochure</h1>
+                <h1 className="text-base lg:text-lg font-semibold text-white">
+                  Our Brochure
+                </h1>
                 <p className="text-[#A2A2A2] text-base">Download</p>
               </div>
 
@@ -205,7 +209,9 @@ const ServiceDetails = () => {
             <div className="flex w-full justify-between items-center">
               <img src={document} alt="Document" />
               <div className="w-4/5 pl-5">
-                <h1 className="text-base lg:text-lg font-semibold text-white">Company Details</h1>
+                <h1 className="text-base lg:text-lg font-semibold text-white">
+                  Company Details
+                </h1>
                 <p className="text-[#A2A2A2] text-base">Download</p>
               </div>
 
@@ -222,13 +228,12 @@ const ServiceDetails = () => {
           </div>
 
           <div className="text-center my-22 border-white border-2 rounded-2xl">
-            <img src={`${
-                      theme === "light"
-                        ? logoBlack
-                        : logoWhite
-                    }`} alt="Logo" className="mx-auto my-5" />
+            <img
+              src={`${theme === "light" ? logoBlack : logoWhite}`}
+              alt="Logo"
+              className="mx-auto my-5"
+            />
             <div className="relative">
-
               <h1 className="text-xl font-bold leading-8 w-3/5 mx-auto my-5">
                 Need Help? We Are Here To Help You
               </h1>
@@ -253,7 +258,9 @@ const ServiceDetails = () => {
           </div>
 
           <div className="my-14">
-            <h1 className="font-bold text-2xl text-center lg:text-4xl my-6">Price $ {service.price}</h1>
+            <h1 className="font-bold text-2xl text-center lg:text-4xl my-6">
+              Price $ {service.price}
+            </h1>
             <Link to={`/checkout/${service._id}`}>
               <button className="btn border-none shadow-none w-full bg-[#FF3811] py-8 text-white rounded-lg text-lg font-semibold">
                 Proceed Checkout
@@ -261,7 +268,6 @@ const ServiceDetails = () => {
             </Link>
           </div>
         </div>
-
       </section>
     </div>
   );

@@ -12,12 +12,18 @@ dotenv.config();
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    // origin: [
+    //   "https://car-doctor-12fbd.firebaseapp.com",
+    //   "https://car-doctor-12fbd.web.app",
+    //   "http://localhost:5000",
+    // ],
+  })
+);
 
 const PORT = process.env.PORT || 5000;
-
-const uri =
-  "mongodb+srv://tohiburtauhid:wOL5JISohIEvpQpr@cardoctorcollection.sgfep6s.mongodb.net/?retryWrites=true&w=majority&appName=carDoctorCollection";
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cardoctorcollection.sgfep6s.mongodb.net/?retryWrites=true&w=majority&appName=carDoctorCollection`;
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
@@ -30,9 +36,12 @@ const client = new MongoClient(uri, {
 
 async function run() {
   try {
-    // Connect the client to the server	(optional starting in v4.7)
+    /**
+     *  Health Check
+     *  Connect the client to the server	(optional starting in v4.7)
+     *  Send a ping to confirm a successful connection
+     */
     await client.connect();
-    // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
     console.log(
       "Pinged your deployment. You successfully connected to MongoDB!"
@@ -113,7 +122,6 @@ async function run() {
       //   }
 
       // }
-
     });
 
     // =========== Delete Cart Item   =============
@@ -232,3 +240,12 @@ app.get("/", async (req, res) => {
 });
 
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
+
+/**
+ * Build by : Md Tohibur Rahman Tauhid
+ * for practicing MERN Stack
+ * 12:42 AM 22th June 2025, India.
+ *
+ *        :)
+ *
+ *  */

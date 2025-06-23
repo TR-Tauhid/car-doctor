@@ -7,15 +7,16 @@ export default function Checkout() {
   const authValue = useContext(AuthContext);
   const { notify, user, theme } = authValue;
   const [service, setService] = useState([]);
-  const id = useParams();
-  const now = new Date();
   const navigate = useNavigate();
+  const now = new Date();
+  const id = useParams();
+
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/serviceDetails/${id.id}`)
+      .get(`http://localhost:5000/serviceDetails/${id?.id}`)
       .then((res) => setService(res.data))
       .catch(() => notify("Faild to fetch service data...!!!", "error"));
-  }, [id.id, notify]);
+  }, [id, notify]);
 
   const handleOrderFormSubmit = (e) => {
     e.preventDefault();

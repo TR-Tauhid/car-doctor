@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   createUserWithEmailAndPassword,
   FacebookAuthProvider,
@@ -27,7 +27,7 @@ const AuthProvider = ({ children }) => {
     setTheme(mediaQuery ? "dark" : "light");
   }, []);
 
-  const notify = (msg, type) => {
+  const notify = useCallback((msg, type) => {
     toast[type](msg, {
       position: "top-center",
       autoClose: 5000,
@@ -38,8 +38,7 @@ const AuthProvider = ({ children }) => {
       progress: undefined,
       theme: `${theme}`,
       transition: Bounce,
-    });
-  };
+    })}, [theme]);
 
   const createUserWithEmail = (email, password) => {
     setLoading(true);

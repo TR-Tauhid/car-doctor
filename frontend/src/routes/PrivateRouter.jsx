@@ -12,7 +12,7 @@ export default function PrivateRouter({ children }) {
     if (authChecked && !user) {
       notify("Please log in first...!!!", "error");
     }
-  }, [authChecked, user, notify]);
+  });
 
   if (loading) {
     return <Loading theme={theme}></Loading>;
@@ -21,6 +21,6 @@ export default function PrivateRouter({ children }) {
   if (user) {
     return children;
   }
-  
+
   return <Navigate state={{ from: location.pathname }} to="/login"></Navigate>;
 }

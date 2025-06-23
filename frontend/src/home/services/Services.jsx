@@ -17,7 +17,6 @@ export default function Services() {
       })
       .catch((err) => {
         notify(`${err.message}...!!!`, "error");
-        console.log(err);
       });
   }, [notify]);
 

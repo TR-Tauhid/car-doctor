@@ -9,7 +9,9 @@ import axios from "axios";
 export default function Cart() {
   const authValue = useContext(AuthContext);
   const { user, notify, theme, cart, setCart } = authValue;
+
   useEffect(() => {
+    console.log("working")
     axios
       .get(`http://localhost:5000/cart/${user?.uid}`)
       .then((res) => {
@@ -18,7 +20,7 @@ export default function Cart() {
       .catch((err) => {
         notify(`Error: ${err?.response?.data?.message}`, "error");
       });
-  }, [user?.uid, notify, setCart]);
+  }, [setCart, user?.uid, notify]);
 
   const deleteCartItem = (id) => {
     const updatedCart = cart.filter((item) => item._id != id);

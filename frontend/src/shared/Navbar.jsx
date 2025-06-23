@@ -106,6 +106,9 @@ const Navbar = () => {
   };
 
   useEffect(() => {
+    if (!user?.uid) {
+      return;
+    }
     axios
       .get(`http://localhost:5000/cart/${user?.uid}`)
       .then((res) => {
