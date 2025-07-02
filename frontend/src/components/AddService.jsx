@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
 import axios from "axios";
 import AuthContext from "../Context/AuthContext";
+import { Helmet } from "react-helmet";
 
 export default function AddService() {
   const authValue = useContext(AuthContext);
-  const { theme, user, notify } = authValue;
+  const { theme, notify } = authValue;
 
   const serviceFacilities = {
     facility: [
@@ -68,6 +69,9 @@ export default function AddService() {
 
   return (
     <div>
+      <Helmet>
+        <title>Add Services | Add Services</title>
+      </Helmet>
       <div className="w-11/12 md:w-10/12 mx-auto my-14 ">
         <section
           className={`w-full h-60 md:h-80 bg-no-repeat bg-center rounded-2xl text-white`}

@@ -1,7 +1,6 @@
 import { useContext } from "react";
-import About from "./About";
+import AboutCard from "./AboutCard";
 import Banner from "./Banner";
-import Services from "./services/Services";
 import Loading from "../components/Loading";
 import AuthContext from "../Context/AuthContext";
 import ContactCard from "./ContactCard";
@@ -9,6 +8,8 @@ import PopularProducts from "./PopularProducts";
 import Team from "../components/Team";
 import Features from "../components/Features";
 import Testimonial from "../components/Testimonial";
+import { Helmet } from "react-helmet";
+import ServicesCard from "./services/ServicesCard";
 
 export default function Home() {
   const authValue = useContext(AuthContext);
@@ -19,17 +20,20 @@ export default function Home() {
   }
   return (
     <div className="w-11/12 mx-auto">
+      <Helmet>
+        <title>Car Doctor | Home</title>
+      </Helmet>
       {/* Banner Section Here */}
 
       <Banner />
 
       {/* About us section */}
 
-      <About />
+      <AboutCard />
 
       {/* Services here */}
 
-      <Services />
+      <ServicesCard />
 
       {/* Contacts Here */}
 

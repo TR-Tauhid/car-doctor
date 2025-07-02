@@ -15,7 +15,7 @@ export default function Testimonial() {
       </div>
 
       <div className="space-y-3 md:flex justify-center gap-x-6 ">
-        <div className="w-fit p-4 md:p-6 lg:p-12 border border-[#cfcfcf] shadow-sm rounded-xl">
+        <div className="w-fit mb-0 p-4 md:p-6 lg:p-12 border border-[#cfcfcf] shadow-sm rounded-xl">
           <div className="flex max-sm:flex-col max-sm:space-y-3  gap-x-5">
             <div>
               <img className="min-w-16" src={person1} alt="Person" />
@@ -28,6 +28,7 @@ export default function Testimonial() {
               <img src={quote} alt="Quote" />
             </div>
           </div>
+
           <div className="my-5">
             <h5 className="md:leading-7 max-sm:text-xs text-[#a1a1a1] max-w-lg">
               There are many variations of passages of Lorem Ipsum available,

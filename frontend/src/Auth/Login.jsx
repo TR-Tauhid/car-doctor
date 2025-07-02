@@ -4,7 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router";
 import eye from "/icons/eye.svg";
 import eyeClose from "/icons/eye-close.svg";
 import loginSVG from "/images/login/login.svg";
-import { ToastContainer } from "react-toastify";
+import { Helmet } from "react-helmet";
 
 export default function Login() {
   const [toggleEye, setToggleEye] = useState(true);
@@ -90,6 +90,9 @@ export default function Login() {
 
   return (
     <div className="my-8">
+      <Helmet>
+        <title>Car Doctor | Login</title>
+      </Helmet>
       <div className="hero">
         <div className={`hero-content flex-col lg:flex-row-reverse gap-x-14`}>
           <div className="max-sm:w-1/2 max-sm:mb-8">

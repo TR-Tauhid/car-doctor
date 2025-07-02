@@ -3,7 +3,7 @@ import call from "/icons/call.svg";
 import location from "/icons/location.svg";
 export default function ContactCard() {
   return (
-    <div className="lg:w-11/12 mx-auto my-14 text-white bg-black border-2 border-gray-500 rounded-xl">
+    <div className="w-11/12 mx-auto my-14 text-white bg-black border-2 border-gray-500 rounded-xl">
       <div className="flex max-[1300px]:flex-col max-[1300px]:space-y-10 max-sm:space-y-5 text-center *:max-sm:flex-col *:max-sm:space-y-5 justify-around items-center py-24 ">
         <div className="flex  items-center justify-center gap-x-4">
           <div>
@@ -30,7 +30,9 @@ export default function ContactCard() {
             <img src={location} alt="Location" />
           </div>
           <div>
-            <h1 className="font-medium text-base">Need a repair? our address</h1>
+            <h1 className="font-medium text-base">
+              Need a repair? our address
+            </h1>
             <h1 className="font-bold text-2xl">Liza Street, New York</h1>
           </div>
         </div>

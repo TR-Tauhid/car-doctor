@@ -5,6 +5,8 @@ import { updateProfile } from "firebase/auth";
 import eye from "/icons/eye.svg";
 import loginSVG from "/images/login/login.svg";
 import eyeClose from "/icons/eye-close.svg";
+import {Helmet} from "react-helmet";
+
 
 export default function Register() {
   const authValue = useContext(AuthContext);
@@ -41,6 +43,9 @@ export default function Register() {
 
   return (
     <div className="my-8">
+      <Helmet>
+        <title>Car Doctor | Register</title>
+      </Helmet>
       <div className="hero">
         <div className="hero-content flex-col lg:flex-row-reverse gap-x-14">
           <div className="max-sm:w-1/2 max-sm:mb-8">
@@ -49,7 +54,7 @@ export default function Register() {
           <div className="card  w-full max-w-sm shrink-0 shadow-2xl border-2 border-slate-400 rounded-4xl">
             <div className="card-body">
               <fieldset className="fieldset">
-                <form onSubmit={handleSubmitBtn} className="space-y-1">
+                <form onSubmit={handleSubmitBtn} className="formTextClass space-y-1">
                   <label className="label">User Name</label>
                   <label className="input validator mb-6">
                     <svg

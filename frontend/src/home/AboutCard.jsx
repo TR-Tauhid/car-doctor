@@ -1,8 +1,10 @@
 import person from "/images/about_us/person.jpg"
 import parts from "/images/about_us/parts.jpg"
-export default function About() {
+
+export default function AboutCard() {
   return (
     <div className="my-10 md:my-20">
+      
       <div className="flex flex-col lg:flex-row gap-x-10 h-full relative ">
         <div className="relative my-8 md:my-14">
           <img className="rounded-lg mx-auto w-10/12 md:w-4/6 md:h-96 lg:h-[600px]" src={person} alt="Person" />

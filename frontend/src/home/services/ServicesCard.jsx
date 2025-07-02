@@ -4,7 +4,7 @@ import Loading from "../../components/Loading";
 import AuthContext from "../../Context/AuthContext";
 import axios from "axios";
 
-export default function Services() {
+export default function ServicesCard() {
 
   const authValue = useContext(AuthContext);
   const { theme, notify } = authValue;
@@ -22,7 +22,7 @@ export default function Services() {
 
   return (
     <div className="my-8 md:my-14 text-center mx-auto">
-      <div className="space-y-8 my-8 md:my-24">
+      <div className="space-y-8 my-8 md:my-24 md:mt-4">
         <div className=" w-full text-[#ff3811] font-semibold text-xl">
           <h1>Services</h1>
         </div>

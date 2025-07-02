@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import AuthContext from "../Context/AuthContext";
 import axios from "axios";
+import {Helmet} from "react-helmet";
 import ManageOrdersCard from "./ManageOrdersCard";
 
 export default function ManageOrders() {
@@ -17,6 +18,9 @@ export default function ManageOrders() {
 
   return (
     <div>
+      <Helmet>
+        <title>Car Doctor | Manage Orders</title>
+      </Helmet>
       {orders?.length === 0 ? (
         <div className="text-center font-bold text-3xl leading-14">
           <h1>

@@ -110,10 +110,10 @@ const ServiceDetails = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 w-full justify-center ">
-            <div className="p-4 md:p-5 lg:p-8 max-w-48 border border-gray-400 rounded-xl space-y-5 text-center">
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 w-full justify-center lg:justify-around">
+            <div className="p-4 md:p-5 lg:p-8 max-w-48 lg:max-w-60 border border-gray-400 rounded-xl space-y-5 text-center">
               <div className="w-fit mx-auto p-4 rounded-full bg-[#ff391138]">
-                <div className=" p-4 rounded-full bg-[#FF3811]">
+                <div className="p-4 rounded-full bg-[#FF3811]">
                   <h1 className="text-white font-bold text-lg px-2 py-1">01</h1>
                 </div>
               </div>
@@ -123,7 +123,7 @@ const ServiceDetails = () => {
               </p>
             </div>
 
-            <div className=" p-4 md:p-5 lg:p-8 max-w-48 border border-gray-400 rounded-xl space-y-5 text-center">
+            <div className=" p-4 md:p-5 lg:p-8 max-w-48 lg:max-w-56 border border-gray-400 rounded-xl space-y-5 text-center">
               <div className="w-fit mx-auto p-4 rounded-full bg-[#ff391138]">
                 <div className=" p-4 rounded-full bg-[#FF3811]">
                   <h1 className="text-white font-bold text-lg px-2 py-1">02</h1>
@@ -134,7 +134,7 @@ const ServiceDetails = () => {
                 It Uses A Dictionary <br /> Of Over 200.
               </p>
             </div>
-            <div className=" p-4 md:p-5 lg:p-8 max-w-48 border border-gray-400 rounded-xl space-y-5 text-center">
+            <div className=" p-4 md:p-5 lg:p-8 max-w-48 lg:max-w-56 border border-gray-400 rounded-xl space-y-5 text-center">
               <div className="w-fit mx-auto p-4 rounded-full bg-[#ff391138]">
                 <div className=" p-4 rounded-full bg-[#FF3811]">
                   <h1 className="text-white font-bold text-lg px-2 py-1">03</h1>
@@ -147,9 +147,7 @@ const ServiceDetails = () => {
             </div>
           </div>
 
-          <div className="my-14 text-center">
-            <h1>Video Here</h1>
-          </div>
+          {/* Add: video here... */}
         </div>
 
         <div className="md:w-1/3">

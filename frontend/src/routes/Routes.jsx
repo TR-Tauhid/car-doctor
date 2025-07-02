@@ -3,17 +3,17 @@ import Root from "../Root";
 import Home from "../home/Home";
 import Login from "../Auth/Login";
 import Register from "../Auth/Register";
-import Services from "../home/services/Services";
 import Contact from "../components/Contact";
 import ServiceDetails from "../components/ServiceDetails";
 import Checkout from "../components/Checkout";
 import AddService from "../components/AddService";
-import About from "../home/About";
 import Blogs from "../components/Blogs";
 import ErrorPage from "../components/ErrorPage";
 import Cart from "../components/Cart";
 import PrivateRouter from "./PrivateRouter";
 import ManageOrders from "../components/ManageOrders";
+import About from "../components/About";
+import Services from "../components/Services";
 const router = createBrowserRouter([
   {
     path: "/",
