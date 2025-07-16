@@ -30,7 +30,7 @@ export default function Banner() {
             </div>
             <img src={img1} className="w-full " />
 
-            <div className="absolute left-5 right-5 max-sm:top-10 md:bottom-0  flex -translate-y-1/2 transform justify-end gap-x-5">
+            <div className="absolute left-5 right-5 max-md:top-10 md:bottom-0  flex -translate-y-1/2 transform justify-end gap-x-5">
               <a href="#slide6" className="btn btn-circle  bg-[#FFFFFF33]">
                 ❮
               </a>

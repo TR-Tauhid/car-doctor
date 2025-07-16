@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+import axios from "axios";
 import {
   createUserWithEmailAndPassword,
   FacebookAuthProvider,
@@ -27,18 +28,22 @@ const AuthProvider = ({ children }) => {
     setTheme(mediaQuery ? "dark" : "light");
   }, []);
 
-  const notify = useCallback((msg, type) => {
-    toast[type](msg, {
-      position: "top-center",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: `${theme}`,
-      transition: Bounce,
-    })}, [theme]);
+  const notify = useCallback(
+    (msg, type) => {
+      toast[type](msg, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: `${theme}`,
+        transition: Bounce,
+      });
+    },
+    [theme]
+  );
 
   const createUserWithEmail = (email, password) => {
     setLoading(true);
@@ -75,14 +80,24 @@ const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(
-      auth,
-      (currentUser) => {
-        setUser(currentUser);
-        setAuthChecked(true);
-        setLoading(false);
-      },
-    );
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      console.log(currentUser);
+      setAuthChecked(true);
+      setLoading(false);
+
+      const loggedUser = { email: user?.email };
+      console.log(loggedUser);
+
+      if (currentUser) {
+        axios
+          .post("http://localhost:5000/jwt", loggedUser, {
+            withCredentials: true,
+          })
+          .then((res) => console.log(res?.data))
+          .catch((err) => notify(err, "error"));
+      }
+    });
     return () => {
       unsubscribe();
     };

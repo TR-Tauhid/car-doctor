@@ -1,6 +1,8 @@
 import express from "express";
-import cors from "cors";
 import dotenv from "dotenv";
+import cors from "cors";
+// const jwt = require("jsonwebtoken");
+import jwt from "jsonwebtoken";
 import {
   ConnectionCheckOutStartedEvent,
   MongoClient,
@@ -14,11 +16,12 @@ const app = express();
 app.use(express.json());
 app.use(
   cors({
-    // origin: [
-    //   "https://car-doctor-12fbd.firebaseapp.com",
-    //   "https://car-doctor-12fbd.web.app",
-    //   "http://localhost:5000",
-    // ],
+    origin: [
+      "https://car-doctor-12fbd.firebaseapp.com",
+      "https://car-doctor-12fbd.web.app",
+      "http://localhost:5173",
+    ],
+    credentials: true,
   })
 );
 
@@ -50,6 +53,14 @@ async function run() {
     const database = client.db("carDoctorDB");
     const servicesCollection = database.collection("servicesCollection");
     const ordersCollection = database.collection("ordersCollection");
+
+    // ============ JWT API  =================
+    app.post("/jwt", async (req, res) => {
+      const user = req.body;
+      console.log("user for secret token", user);
+      const token = jwt.sign(user, process.env.ACCESS_SECRET_TOKEN, { expiresIn: 60 * 60 });
+      res.send({token})
+    });
 
     // ============  Services  ===============
     app.get("/services", async (req, res) => {

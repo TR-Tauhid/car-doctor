@@ -112,7 +112,7 @@ const Navbar = () => {
     axios
       .get(`http://localhost:5000/cart/${user?.uid}`)
       .then((res) => {
-        setCart(res.data);
+        setCart(res?.data);
       })
       .catch((err) => {
         notify(`Error: ${err.response.data.message}`, "error");
@@ -162,7 +162,7 @@ const Navbar = () => {
             <ul className="menu menu-horizontal px-1 gap-x-5">{menuItem}</ul>
           </div>
         ) : (
-          <div className="navbar-center hidden lg:flex ">
+          <div className="hidden navbar-center lg:flex ">
             <ul className="menu menu-horizontal min-[1440px]:gap-x-5">{menuItem}</ul>
           </div>
         )}
@@ -196,7 +196,7 @@ const Navbar = () => {
             </svg>
           </label>
 
-          <a className="border-2 p-2 max-sm:hidden bg-white md:px-7 md:py-4 c-btn max-sm:text-xs text-[#ff3811]">
+          <a className="border-2 p-2 max-md:flex max-[1120px]:hidden bg-white md:px-7 md:py-4 c-btn max-sm:text-xs text-[#ff3811]">
             Appointment
           </a>
 

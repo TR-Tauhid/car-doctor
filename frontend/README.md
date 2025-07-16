@@ -14,3 +14,4 @@ Dependencies/Libraries/UI ==============
 7. Tailwind
 8. Swiper slider
 9. React Helmet
+10. JWT

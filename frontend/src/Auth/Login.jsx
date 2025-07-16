@@ -33,7 +33,7 @@ export default function Login() {
       .then((res) => {
         if (res.user) {
           navigate(location?.state ? location.state.from : "/");
-          notify(`Welcome ${user?.displayName}...!!!`, "success");
+          notify(`Welcome ${res?.user?.displayName}...!!!`, "success");
         }
       })
       .catch((err) => notify(`${err.message}...!!!`, "error"));
@@ -44,7 +44,7 @@ export default function Login() {
       .then((res) => {
         if (res.user) {
           navigate(location?.state ? location.state.from : "/");
-          notify(`Welcome ${user?.displayName}...!!!`, "success");
+          notify(`Welcome ${res?.user?.displayName}...!!!`, "success");
         }
       })
       .catch((err) => notify(`${err.message}...!!!`, "error"));
@@ -55,7 +55,7 @@ export default function Login() {
       .then((res) => {
         if (res.user) {
           navigate(location?.state ? location.state.from : "/");
-          notify(`Welcome ${user?.displayName}...!!!`, "success");
+          notify(`Welcome ${res?.user?.displayName}...!!!`, "success");
         }
       })
       .catch((err) => notify(`${err.message}...!!!`, "error"));
@@ -66,7 +66,7 @@ export default function Login() {
       .then((res) => {
         if (res.user) {
           navigate(location?.state ? location.state.from : "/");
-          notify(`Welcome ${user?.displayName}...!!!`, "success");
+          notify(`Welcome ${res?.user?.displayName}...!!!`, "success");
         }
       })
       .catch((err) => notify(`${err.message}...!!!`, "error"));
@@ -77,7 +77,7 @@ export default function Login() {
       .then((res) => {
         if (res.user) {
           navigate(location?.state ? location.state.from : "/");
-          notify(`Welcome ${user?.displayName}...!!!`, "success");
+          notify(`Welcome ${res?.user?.displayName}...!!!`, "success");
         }
       })
       .catch((err) => notify(`${err.message}...!!!`, "error"));
@@ -107,7 +107,7 @@ export default function Login() {
                   <input
                     type="email"
                     name="email"
-                    className="input mb-6 w-full mx-auto"
+                    className="input mb-6 w-full mx-auto text-black"
                     placeholder="Email"
                   />
                   <label className="label">Password</label>
@@ -134,6 +134,7 @@ export default function Login() {
                       </g>
                     </svg>
                     <input
+                      className="text-black"
                       name="password"
                       type={toggleEye ? "password" : "text"}
                       required
