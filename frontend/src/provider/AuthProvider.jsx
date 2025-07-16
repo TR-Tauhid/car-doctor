@@ -87,7 +87,6 @@ const AuthProvider = ({ children }) => {
       setLoading(false);
 
       const loggedUser = { email: user?.email };
-      console.log(loggedUser);
 
       if (currentUser) {
         axios
@@ -101,7 +100,7 @@ const AuthProvider = ({ children }) => {
     return () => {
       unsubscribe();
     };
-  }, []);
+  }, [notify, user]);
 
   const logOut = () => {
     return signOut(auth);
