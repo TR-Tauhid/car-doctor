@@ -1,7 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
-// const jwt = require("jsonwebtoken");
+
 import jwt from "jsonwebtoken";
 import {
   ConnectionCheckOutStartedEvent,
@@ -55,14 +55,24 @@ async function run() {
     const ordersCollection = database.collection("ordersCollection");
 
     // ============ JWT API  =================
+
     app.post("/jwt", async (req, res) => {
       const user = req.body;
       console.log("user for secret token", user);
-      const token = jwt.sign(user, process.env.ACCESS_SECRET_TOKEN, { expiresIn: 60 * 60 });
-      res.send({token})
+      const token = jwt.sign(user, process.env.ACCESS_SECRET_TOKEN, {
+        expiresIn: 60 * 60,
+      });
+      res
+        .cookie("token", token, {
+          httpOnly: true,
+          secure: false,
+          sameSite: "none",
+        })
+        .send({ success: true });
     });
 
     // ============  Services  ===============
+
     app.get("/services", async (req, res) => {
       try {
         const result = await servicesCollection.find({}).toArray();

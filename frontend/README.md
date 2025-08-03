@@ -1,7 +1,7 @@
 ==================      BACKLOGS        ==================
 1. Add Dynamic title. 
 2. Add Icon on the tab.
-3. 
+3. Cart not empty after logout.
 
 
 Dependencies/Libraries/UI ==============
@@ -15,3 +15,5 @@ Dependencies/Libraries/UI ==============
 8. Swiper slider
 9. React Helmet
 10. JWT
+
+
