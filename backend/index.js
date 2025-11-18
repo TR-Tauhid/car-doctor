@@ -51,10 +51,10 @@ async function run() {
     );
 
     const database = client.db("carDoctorDB");
-    const servicesCollection = database.collection("servicesCollection");
+    const servicesCollection = database.collection("servicesCollection");   
     const ordersCollection = database.collection("ordersCollection");
 
-    // ============ JWT API  =================
+    // ============ JWT =================
 
     app.post("/jwt", async (req, res) => {
       const user = req.body;
@@ -111,7 +111,7 @@ async function run() {
         res.status(201).send(result);
       } catch {
         (err) => console.error(err);
-        res.status(400).json({ message: "Faild to fetch cart data...!!!" });
+        res.status(400).json({ message: "Failed to fetch cart data...!!!" });
       }
 
       // {

@@ -32,6 +32,7 @@ export default function Login() {
     logInWithEmailPass(email, password)
       .then((res) => {
         if (res.user) {
+          console.log(res.data);
           navigate(location?.state ? location.state.from : "/");
           notify(`Welcome ${res?.user?.displayName}...!!!`, "success");
         }
@@ -43,6 +44,7 @@ export default function Login() {
     googleLogIn()
       .then((res) => {
         if (res.user) {
+          console.log(res.data);
           navigate(location?.state ? location.state.from : "/");
           notify(`Welcome ${res?.user?.displayName}...!!!`, "success");
         }
@@ -54,6 +56,7 @@ export default function Login() {
     githubLogIn()
       .then((res) => {
         if (res.user) {
+          console.log(res.data);
           navigate(location?.state ? location.state.from : "/");
           notify(`Welcome ${res?.user?.displayName}...!!!`, "success");
         }
@@ -65,6 +68,7 @@ export default function Login() {
     facebookLogIn()
       .then((res) => {
         if (res.user) {
+          console.log(res.data);
           navigate(location?.state ? location.state.from : "/");
           notify(`Welcome ${res?.user?.displayName}...!!!`, "success");
         }
@@ -76,6 +80,7 @@ export default function Login() {
     twitterLogIn()
       .then((res) => {
         if (res.user) {
+          console.log(res.data);
           navigate(location?.state ? location.state.from : "/");
           notify(`Welcome ${res?.user?.displayName}...!!!`, "success");
         }

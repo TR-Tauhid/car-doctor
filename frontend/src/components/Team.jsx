@@ -67,7 +67,7 @@ export default function Team() {
         navigation={true}
         spaceBetween={30}
         modules={[FreeMode, Navigation]}
-        className="min-sm:mySwiper w-full"
+        className="min-sm:mySwiper w-full p-20"
       >
         <SwiperSlide>
           <div className="border relative group border-[#E8E8E8] w-44 md:w-80 lg:w-96 md:h-[480px] lg:h-auto p-2 md:p-5 rounded-xl shadow-xs md:shadow-md shadow-gray-300 text-center space-y-4">

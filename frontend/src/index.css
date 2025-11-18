@@ -59,6 +59,9 @@ ul > li {
 .swiper-slide {
   width: auto !important;
 }
+.swiper-wrapper{
+  padding: 40px;
+}
 
 .insta-bg {
   background: linear-gradient(
@@ -121,6 +124,8 @@ ul > li {
 .bg-after-black:after {
   background-color: #000;
 }
+
+
 
 @import "tailwindcss";
 @plugin "daisyui";

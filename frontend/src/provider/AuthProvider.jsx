@@ -96,7 +96,6 @@ const AuthProvider = ({ children }) => {
           .then((res) => console.log(res?.data))
           .catch((err) => notify(err, "error"));
       }
-    console.log(loggedUser, currentUser)
     });
     return () => {
       unsubscribe();
