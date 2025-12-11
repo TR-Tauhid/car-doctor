@@ -19,7 +19,7 @@ export default function Features() {
       </div>
 
       <div
-        className={`*:hover:bg-[#992299] *:hover:bg *:hover:text-white *:bg-[#d4e5ffd2] grid grid-cols-2 text-center gap-3 justify-items-center min-sm:grid-cols-3 min-sm:gap-y-10 lg:flex text-[#444444] justify-center gap-x-6 font-bold my-14 *:p-3 *:border *:border-[#E8E8E8] *:rounded-xl *:min-sm:w-44 *:h-40 *:space-y-3 text-base  
+        className={`*:hover:bg-[#992299] *:hover:shadow-lg *:hover:shadow-cyan-400 *:hover:text-white *:bg-[#d4e5ffd2] grid grid-cols-2 text-center gap-3 justify-items-center min-sm:grid-cols-3 min-sm:gap-y-10 lg:flex text-[#444444] justify-center gap-x-6 font-bold my-14 *:p-3 *:border *:border-[#E8E8E8] *:rounded-xl *:min-sm:w-44 *:h-40 *:space-y-3 text-base  
         }`}
       >
         <div className="flex flex-col justify-center items-center">

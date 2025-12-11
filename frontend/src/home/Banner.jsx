@@ -9,21 +9,21 @@ export default function Banner() {
   return (
     <div>
       <section>
-        <div className="carousel w-full h-[600px] rounded-2xl">
+        <div className="carousel w-full md:h-[600px] rounded-2xl">
           <div id="slide1" className="carousel-item relative w-full">
-            <div className="md:pl-24 md:pb-24 p-6 bg-linear-to-r from-[#151515] to-[rgba(21, 21, 21, 0.08)] w-full h-full absolute flex flex-col justify-end text-white ">
-              <h1 className="font-bold font-inter text-2xl md:text-6xl md:leading-20 lg:w-1/4">
+            <div className="md:pl-24 md:pb-24 p-2 md:p-6 bg-linear-to-r from-[#151515] to-[rgba(21, 21, 21, 0.08)] w-full h-full absolute flex flex-col justify-end text-white ">
+              <h1 className="font-bold font-inter text-xl leading-5 md:text-6xl md:leading-20 lg:w-1/4">
                 Affordable Price For Car Servicing
               </h1>
-              <p className="font-extralight text-lg leading-7 w-3/4 my-5">
+              <p className="font-extralight max-sm:my-2 text-xs md:text-lg md:leading-7 leading-3 w-3/4 md:my-5">
                 There are many variations of passages of available, but the
                 majority have suffered alteration in some form
               </p>
-              <div className="flex gap-x-5">
-                <button className="c-btn py-4 px-7 rounded-2xl bg-[#FF3811] text-white">
+              <div className="flex gap-x-5 *:max-md:p-2">
+                <button className="cursor-pointer c-btn text-xs md:py-4 md:px-7 rounded-2xl bg-[#FF3811] text-white">
                   Discover More
                 </button>
-                <button className="py-4 px-7 rounded-lg border-2 border-white">
+                <button className="cursor-pointer text-xs md:py-4 md:px-7 rounded-lg border-2 border-white">
                   Latest Project
                 </button>
               </div>
