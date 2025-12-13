@@ -1,8 +1,8 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
-
 import jwt from "jsonwebtoken";
+import cookieParser from "cookie-parser";
 import {
   ConnectionCheckOutStartedEvent,
   MongoClient,
@@ -12,7 +12,9 @@ import {
 
 dotenv.config();
 
+
 const app = express();
+app.use(cookieParser())
 app.use(express.json());
 app.use(
   cors({
@@ -37,6 +39,13 @@ const client = new MongoClient(uri, {
   },
 });
 
+// ==============   Middlewares  ============
+
+const logger = (req, res, next) => {
+  console.log(req.protocol, req.hostname, req.originalUrl);
+  next();
+}
+
 async function run() {
   try {
     /**
@@ -58,7 +67,6 @@ async function run() {
 
     app.post("/jwt", async (req, res) => {
       const user = req.body;
-      console.log("user for secret token", user);
       const token = jwt.sign(user, process.env.ACCESS_SECRET_TOKEN, {
         expiresIn: 60 * 60,
       });
@@ -66,7 +74,7 @@ async function run() {
         .cookie("token", token, {
           httpOnly: true,
           secure: false,
-          sameSite: "none",
+          sameSite: "lax",
         })
         .send({ success: true });
     });
@@ -101,6 +109,7 @@ async function run() {
         res.status(400).json({ message: "Failed to fetch service data" });
       }
     });
+
 
     // ============  Cart Data  ===============
 
@@ -257,7 +266,7 @@ async function run() {
 run().catch(console.dir);
 
 app.get("/", async (req, res) => {
-  res.send("Car doctor api is running");
+  res.send("Car doctor server is running");
 });
 
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
@@ -265,7 +274,7 @@ app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
 /**
  * Build by : Md Tohibur Rahman Tauhid
  * for practicing MERN Stack
- * 12:42 AM 22th June 2025, India.
+ * 12:42 AM 22th June 2025, Bangladesh.
  *
  *        :)
  *

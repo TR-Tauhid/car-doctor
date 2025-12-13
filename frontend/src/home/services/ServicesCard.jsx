@@ -5,13 +5,12 @@ import AuthContext from "../../Context/AuthContext";
 import axios from "axios";
 
 export default function ServicesCard() {
-
   const authValue = useContext(AuthContext);
   const { theme, notify } = authValue;
   const [services, setServices] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:5000/services")
+      .get("http://localhost:5000/services", { withCredentials: true })
       .then((res) => {
         setServices(res.data);
       })
@@ -21,7 +20,7 @@ export default function ServicesCard() {
   }, [notify]);
 
   return (
-    <div className="my-8 md:my-14 text-center mx-auto">
+    <div className="my-8 md:my-50 w-11/12 text-center mx-auto">
       <div className="space-y-8 my-8 md:my-24 md:mt-4">
         <div className=" w-full text-[#ff3811] font-semibold text-xl">
           <h1>Services</h1>
@@ -70,7 +69,11 @@ export default function ServicesCard() {
                       to={`/serviceDetails/${service?._id}`}
                       className="border border-orange-600 rounded-sm min-sm:rounded-xl p-1 min-sm:p-3 hover:bg-white shadow-amber-50 shadow-xs"
                     >
-                      <img className="animate-pulse" src="/icons/arrow.svg" alt="arrow" />
+                      <img
+                        className="animate-pulse"
+                        src="/icons/arrow.svg"
+                        alt="arrow"
+                      />
                     </Link>
                   </div>
                 </div>

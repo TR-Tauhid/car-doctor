@@ -5,10 +5,10 @@ export default function AboutCard() {
   return (
     <div className="my-10 md:my-20">
       
-      <div className="flex flex-col lg:flex-row gap-x-10 h-full relative ">
+      <div className="flex flex-col lg:flex-row gap-x-10 justify-center h-full relative ">
         <div className="relative my-8 md:my-14">
-          <img className="rounded-lg mx-auto w-10/12 md:w-4/6 md:h-96 lg:h-[600px]" src={person} alt="Person" />
-          <img className="rounded-2xl absolute md:right-10 right-0 top-30 md:top-55 lg:top-70 lg:w-2/5 lg:h-[420px] h-3/5 border-8 border-white" src={parts} alt="parts" />
+          <img className="rounded-lg mx-auto w-10/12 md:min-w-64 md:h-96 lg:h-[400px]" src={person} alt="Person" />
+          <img className="rounded-2xl absolute md:right-10 right-0 top-20 md:top-55 lg:top-70 lg:w-2/5 lg:h-[250px] h-3/5 border-8 border-white" src={parts} alt="parts" />
         </div>
 
         <div className="space-y-10 lg:w-2/5 mt-14 max-sm:pl-4">

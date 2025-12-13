@@ -82,7 +82,7 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      console.log(currentUser);
+      // console.log(currentUser);
       setAuthChecked(true);
       setLoading(false);
 
@@ -93,7 +93,7 @@ const AuthProvider = ({ children }) => {
           .post("http://localhost:5000/jwt", loggedUser, {
             withCredentials: true,
           })
-          .then((res) => console.log(res?.data))
+          .then()
           .catch((err) => notify(err, "error"));
       }
     });

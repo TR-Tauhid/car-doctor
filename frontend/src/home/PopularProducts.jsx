@@ -9,7 +9,7 @@ export default function PopularProducts() {
   const [products, setProducts] = useState([]);
   useEffect(() => {
     axios
-      .get("/data/products.json")
+      .get("/data/products.json", {withCredentials: true})
       .then((res) => setProducts(res?.data))
       .catch((err) => notify(`Error: ${err.message}...!!!`, "error"));
   }, [notify]);
