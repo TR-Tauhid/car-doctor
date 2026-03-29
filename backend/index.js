@@ -12,9 +12,8 @@ import {
 
 dotenv.config();
 
-
 const app = express();
-app.use(cookieParser())
+app.use(cookieParser());
 app.use(express.json());
 app.use(
   cors({
@@ -42,10 +41,39 @@ const client = new MongoClient(uri, {
 // ==============   Middlewares  ============
 
 const logger = (req, res, next) => {
-  console.log(req.protocol, req.hostname, req.originalUrl);
+  console.log("Logger: ", req.protocol, req.hostname, req.originalUrl);
   next();
-}
+};
 
+
+// ==============   Verify Token  ============
+
+const verifyToken = async (req, res, next) => {
+  const token = req.cookies?.token;
+
+  if (!token) {
+    return res.status(401).send({ message: "in verify jwt, no token." });
+  }
+
+  const verify = jwt.verify(
+    token,
+    process.env.ACCESS_SECRET_TOKEN,
+    (err, decoded) => {
+      if (err) {
+        console.log("Token Not Valid...!!!");
+        return res.status(401).send({ message: "Not a valid token" });
+      }
+
+      console.log("req.user.decoded", decoded);
+      req.user = decoded;
+      console.log("TOken decoded", token);
+      next();
+    }
+  );
+  console.log("Verified", verify);
+};
+
+// ============   MongoDB  functions   ===========
 async function run() {
   try {
     /**
@@ -60,12 +88,12 @@ async function run() {
     );
 
     const database = client.db("carDoctorDB");
-    const servicesCollection = database.collection("servicesCollection");   
+    const servicesCollection = database.collection("servicesCollection");
     const ordersCollection = database.collection("ordersCollection");
 
     // ============ JWT =================
 
-    app.post("/jwt", async (req, res) => {
+    app.post("/jwt", logger, async (req, res) => {
       const user = req.body;
       const token = jwt.sign(user, process.env.ACCESS_SECRET_TOKEN, {
         expiresIn: 60 * 60,
@@ -77,6 +105,7 @@ async function run() {
           sameSite: "lax",
         })
         .send({ success: true });
+      console.log("token in jwt", user, token);
     });
 
     // ============  Services  ===============
@@ -110,12 +139,15 @@ async function run() {
       }
     });
 
-
     // ============  Cart Data  ===============
 
-    app.get("/cart/:uid", async (req, res) => {
+    app.get("/cart/:uid", logger, verifyToken, async (req, res) => {
       try {
         const { uid } = req.params;
+        console.log("cart", req.query.email, req.user.email);
+        if (req?.query?.email !== req?.user?.email) {
+          return res.status(403).send({ message: "Unauthorized Access...!!!" });
+        }
         const result = await ordersCollection.find({ uid: uid }).toArray();
         res.status(201).send(result);
       } catch {

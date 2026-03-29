@@ -33,14 +33,14 @@ export default function Login() {
     logInWithEmailPass(email, password)
       .then((res) => {
         if (res.user) {
-          console.log(res.user);
-
           // Get jwt token from server
 
-          axios.post("http://localhost:5000/jwt", user, {withCredentials: true}).then((res) => {
-            console.log(res);
-
-          });
+          axios
+            .post("http://localhost:5000/jwt", user, { withCredentials: true })
+            .then((res) => {
+              console.log(res);
+            })
+            .catch((err) => console.error(err));
 
           navigate(location?.state ? location.state.from : "/");
           notify(`Welcome ${res?.user?.displayName}...!!!`, "success");

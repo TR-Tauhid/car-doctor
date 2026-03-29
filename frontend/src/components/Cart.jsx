@@ -11,9 +11,8 @@ export default function Cart() {
   const { user, notify, theme, cart, setCart } = authValue;
 
   useEffect(() => {
-    console.log("working")
     axios
-      .get(`http://localhost:5000/cart/${user?.uid}`)
+      .get(`http://localhost:5000/cart/${user?.uid}?email=${user?.email}`, { withCredentials: true })
       .then((res) => {
         setCart(res.data);
       })

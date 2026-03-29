@@ -14,7 +14,7 @@ import {
 import auth from "../firebase/firebase.config";
 import { Bounce, toast } from "react-toastify";
 
-import AuthContext from "../Context/AuthContext";
+import AuthContext from "../context/AuthContext";
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -93,8 +93,11 @@ const AuthProvider = ({ children }) => {
           .post("http://localhost:5000/jwt", loggedUser, {
             withCredentials: true,
           })
-          .then()
-          .catch((err) => notify(err, "error"));
+          .then((res) => console.log(res))
+          .catch((err) => {
+            console.log(err);
+            notify(err, "error");
+          });
       }
     });
     return () => {
