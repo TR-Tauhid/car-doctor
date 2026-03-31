@@ -14,7 +14,7 @@ import {
 import auth from "../firebase/firebase.config";
 import { Bounce, toast } from "react-toastify";
 
-import AuthContext from "../context/AuthContext";
+import AuthContext from "../Context/AuthContext";
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
