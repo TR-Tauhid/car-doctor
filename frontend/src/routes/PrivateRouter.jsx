@@ -9,10 +9,10 @@ export default function PrivateRouter({ children }) {
   const { loading, user, theme, notify, authChecked } = authValue;
 
   useEffect(() => {
-    if (authChecked && !user) {
+    if (!authChecked && !user) {
       notify("Please log in first...!!!", "error");
     }
-  });
+  }, [authChecked, user, notify]);
 
   if (loading) {
     return <Loading theme={theme}></Loading>;
