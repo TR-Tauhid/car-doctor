@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import Routes from "./routes/Routes";
 import Navbar from "./shared/Navbar";
-import Footer from "./shared/footer";
+import Footer from "./shared/Footer";
 import { Outlet } from "react-router";
 import { ToastContainer } from 'react-toastify';
 import AuthContext from "./context/AuthContext";
