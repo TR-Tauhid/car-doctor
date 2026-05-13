@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import axios from "axios";
 import AuthContext from "../Context/AuthContext";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 export default function AddService() {
   const authValue = useContext(AuthContext);

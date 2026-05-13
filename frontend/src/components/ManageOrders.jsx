@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import AuthContext from "../Context/AuthContext";
 import axios from "axios";
-import {Helmet} from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import ManageOrdersCard from "./ManageOrdersCard";
 
 export default function ManageOrders() {

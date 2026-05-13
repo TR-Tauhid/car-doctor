@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import AboutCard from "../home/AboutCard";
 export default function About() {
   return (

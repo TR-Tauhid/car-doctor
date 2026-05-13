@@ -4,7 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router";
 import eye from "/icons/eye.svg";
 import eyeClose from "/icons/eye-close.svg";
 import loginSVG from "/images/login/login.svg";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import axios from "axios";
 
 export default function Login() {

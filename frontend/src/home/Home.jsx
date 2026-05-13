@@ -8,7 +8,7 @@ import PopularProducts from "./PopularProducts";
 import Team from "../components/Team";
 import Features from "../components/Features";
 import Testimonial from "../components/Testimonial";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import ServicesCard from "./services/ServicesCard";
 
 export default function Home() {
