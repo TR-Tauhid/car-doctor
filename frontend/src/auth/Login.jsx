@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import AuthContext from "../Context/AuthContext";
+import AuthContext from "../context/AuthContext";
 import { Link, useLocation, useNavigate } from "react-router";
 import eye from "/icons/eye.svg";
 import eyeClose from "/icons/eye-close.svg";

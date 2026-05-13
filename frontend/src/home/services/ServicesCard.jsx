@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router";
 import Loading from "../../components/Loading";
-import AuthContext from "../../Context/AuthContext";
+import AuthContext from "../../context/AuthContext";
 import axios from "axios";
 
 export default function ServicesCard() {

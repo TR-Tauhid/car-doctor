@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router";
-import AuthContext from "../Context/AuthContext";
+import AuthContext from "../context/AuthContext";
 import logoBlack from "/icons/logoBlack.svg";
 import logoWhite from "/icons/logoWhite.svg";
 import axios from "axios";

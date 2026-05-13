@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import axios from "axios";
-import AuthContext from "../Context/AuthContext";
+import AuthContext from "../context/AuthContext";
 import { Helmet } from "react-helmet-async";
 
 export default function AddService() {

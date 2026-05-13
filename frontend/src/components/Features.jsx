@@ -4,7 +4,7 @@ import person from "/icons/person.svg";
 import wrench from "/icons/wrench.svg";
 import check from "/icons/check.svg";
 import delivery from "/icons/delivery.svg";
-import AuthContext from "../Context/AuthContext";
+import AuthContext from "../context/AuthContext";
 
 export default function Features() {
   return (

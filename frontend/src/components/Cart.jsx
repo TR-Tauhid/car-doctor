@@ -1,6 +1,6 @@
 import { MdArrowBack, MdDelete } from "react-icons/md";
 import React, { useContext, useEffect } from "react";
-import AuthContext from "../Context/AuthContext";
+import AuthContext from "../context/AuthContext";
 import { Link } from "react-router";
 import CartCard from "./CartCard";
 import swal from "sweetalert";

@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import AuthContext from "../Context/AuthContext";
+import AuthContext from "../context/AuthContext";
 
 export default function Checkout() {
   const authValue = useContext(AuthContext);

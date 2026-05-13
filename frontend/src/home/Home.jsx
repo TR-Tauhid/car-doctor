@@ -2,7 +2,7 @@ import { useContext } from "react";
 import AboutCard from "./AboutCard";
 import Banner from "./Banner";
 import Loading from "../components/Loading";
-import AuthContext from "../Context/AuthContext";
+import AuthContext from "../context/AuthContext";
 import ContactCard from "./ContactCard";
 import PopularProducts from "./PopularProducts";
 import Team from "../components/Team";

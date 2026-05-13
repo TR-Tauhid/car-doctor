@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useContext, useState } from "react";
 import { MdCheckCircle } from "react-icons/md";
-import AuthContext from "../Context/AuthContext";
+import AuthContext from "../context/AuthContext";
 
 export default function ManageOrdersCard({ order }) {
   const authValue = useContext(AuthContext);

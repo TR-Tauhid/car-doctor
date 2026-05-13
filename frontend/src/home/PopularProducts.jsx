@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import ProductCard from "../components/ProductCard";
-import AuthContext from "../Context/AuthContext";
+import AuthContext from "../context/AuthContext";
 import axios from "axios";
 
 export default function PopularProducts() {

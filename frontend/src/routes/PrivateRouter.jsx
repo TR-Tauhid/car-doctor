@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import Loading from "../components/Loading";
-import AuthContext from "../Context/AuthContext";
+import AuthContext from "../context/AuthContext";
 import { Navigate, useLocation } from "react-router";
 
 export default function PrivateRouter({ children }) {

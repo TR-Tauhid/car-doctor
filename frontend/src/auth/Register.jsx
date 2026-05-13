@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import AuthContext from "../Context/AuthContext";
+import AuthContext from "../context/AuthContext";
 import { Link, useLocation, useNavigate } from "react-router";
 import { updateProfile } from "firebase/auth";
 import eye from "/icons/eye.svg";

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
-import AuthContext from "../Context/AuthContext";
+import AuthContext from "../context/AuthContext";
 import { Link, useParams } from "react-router";
 import document from "/icons/document.svg";
 import arrow from "/icons/arrow.svg";

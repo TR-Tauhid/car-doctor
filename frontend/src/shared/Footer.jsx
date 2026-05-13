@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import AuthContext from "../Context/AuthContext";
+import AuthContext from "../context/AuthContext";
 import logoWhite from "/icons/logoWhite.svg";
 import logoBlack from "/icons/logoBlack.svg";
 import { FaGoogle, FaInstagram, FaLinkedin } from "react-icons/fa";

@@ -4,7 +4,7 @@ import Navbar from "./shared/Navbar";
 import Footer from "./shared/footer";
 import { Outlet } from "react-router";
 import { ToastContainer } from 'react-toastify';
-import AuthContext from "./Context/AuthContext";
+import AuthContext from "./context/AuthContext";
 
 export default function Root() {
   const authValue = useContext(AuthContext);
