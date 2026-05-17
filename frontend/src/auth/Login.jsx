@@ -5,7 +5,6 @@ import eye from "/icons/eye.svg";
 import eyeClose from "/icons/eye-close.svg";
 import loginSVG from "/images/login/login.svg";
 import { Helmet } from "react-helmet-async";
-import axios from "axios";
 
 export default function Login() {
   const [toggleEye, setToggleEye] = useState(true);
@@ -16,7 +15,6 @@ export default function Login() {
     theme,
     notify,
     logInWithEmailPass,
-    user,
     googleLogIn,
     githubLogIn,
     facebookLogIn,
@@ -33,14 +31,6 @@ export default function Login() {
     logInWithEmailPass(email, password)
       .then((res) => {
         if (res.user) {
-          // Get jwt token from server
-
-          axios
-            .post("http://localhost:5000/jwt", user, { withCredentials: true })
-            .then((res) => {
-              console.log(res);
-            })
-            .catch((err) => console.error(err));
 
           navigate(location?.state ? location.state.from : "/");
           notify(`Welcome ${res?.user?.displayName}...!!!`, "success");

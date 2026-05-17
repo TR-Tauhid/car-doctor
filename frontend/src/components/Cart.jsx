@@ -4,17 +4,17 @@ import AuthContext from "../context/AuthContext";
 import { Link } from "react-router";
 import CartCard from "./CartCard";
 import swal from "sweetalert";
-import axios from "axios";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 export default function Cart() {
   const authValue = useContext(AuthContext);
   const { user, notify, theme, cart, setCart } = authValue;
+  const axiosSecure = useAxiosSecure();
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:5000/cart/${user?.uid}?email=${user?.email}`, { withCredentials: true })
-      .then((res) => {
-        setCart(res.data);
+    axiosSecure
+      .get(`http://localhost:5000/cart`, {
+        
       })
       .catch((err) => {
         notify(`Error: ${err?.response?.data?.message}`, "error");
@@ -38,13 +38,15 @@ export default function Cart() {
         swal("Your cart orders have been deleted...!!!", {
           icon: "success",
         });
-        axios
-          .delete(`http://localhost:5000/delete-cart/${user?.uid}`)
+        axiosSecure
+          .delete(`http://localhost:5000/delete-cart/${user?.uid}`, {
+            
+          })
           .then((res) => {
             if (res?.data?.deletedCount > 0) {
               notify(
                 ` ${res?.data?.deletedCount} item(s) has been deleted...!!!`,
-                "success"
+                "success",
               );
               setCart([]);
             }

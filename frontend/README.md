@@ -17,3 +17,16 @@ Dependencies/Libraries/UI ==============
 10. JWT
 
 
+
+
+===========     JWT     ===========
+
+-----------------------------------
+            Make Api Secure         
+-----------------------------------
+
+1. Assign token to user which can be 2 types, (Access , Refresh ) tokens.
+2. Access token contains user Identification (email, role etc) for shorter duration.
+3. Refresh token is used for recreation of access token when it expires.
+4. Refresh token invalid ? Kick the user and login again.
+

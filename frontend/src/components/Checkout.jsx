@@ -1,5 +1,5 @@
-import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 import { useNavigate, useParams } from "react-router";
 import AuthContext from "../context/AuthContext";
 
@@ -10,10 +10,13 @@ export default function Checkout() {
   const navigate = useNavigate();
   const now = new Date();
   const id = useParams();
+  const axiosSecure = useAxiosSecure();
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:5000/serviceDetails/${id?.id}`)
+    axiosSecure
+      .get(`http://localhost:5000/serviceDetails/${id?.id}`, {
+        
+      })
       .then((res) => setService(res.data))
       .catch(() => notify("Faild to fetch service data...!!!", "error"));
   }, [id, notify]);
@@ -48,13 +51,13 @@ export default function Checkout() {
       uid,
     };
 
-    axios
-      .post("http://localhost:5000/order", orderData)
+    axiosSecure
+      .post("http://localhost:5000/order", orderData, )
       .then((res) => {
         if (res.statusText === "Created") {
           notify(
             "Order placed successfully...!!! Going back to Services.",
-            "success"
+            "success",
           );
           navigate("/services");
           e.target.reset();

@@ -1,23 +1,26 @@
-import axios from "axios";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 import { useContext, useState } from "react";
 import { MdCheckCircle } from "react-icons/md";
 import AuthContext from "../context/AuthContext";
 
 export default function ManageOrdersCard({ order }) {
   const authValue = useContext(AuthContext);
+  const axiosSecure = useAxiosSecure();
+
   const { user, theme, notify } = authValue;
   const [currentApprovalStatus, setCurrentApprovalStatus] = useState(
-    `${order?.approvalStatus}`
+    `${order?.approvalStatus}`,
   );
   const handleModifyBtn = (e) => {
     e.preventDefault();
     const approvalStatus = e.target.value;
     setCurrentApprovalStatus(approvalStatus);
 
-    axios
+    axiosSecure
       .patch(`http://localhost:5000/manageOrders/${user?.uid}`, {
         id: order?._id,
         approvalStatus: approvalStatus,
+        
       })
       .then((res) => {
         if (res?.data?.modifiedCount === 1) {
@@ -61,14 +64,13 @@ export default function ManageOrdersCard({ order }) {
 
       <td className="flex-col md:justify-around lg:items-start font-medium text-xs md:text-base lg:min-h-28 *:flex *:max-sm:justify-between *:items-center ">
         <h1>
-          <span className="font-bold">First Name </span> {" "} - {" "}
-          {order?.fName}
+          <span className="font-bold">First Name </span> - {order?.fName}
         </h1>
         <h1>
-          <span className="font-bold">Email </span> {" "} - {" "} {order?.email}
+          <span className="font-bold">Email </span> - {order?.email}
         </h1>
         <h1>
-          <span className="font-bold">Phone </span> {" "} - {" "} {order?.phone}
+          <span className="font-bold">Phone </span> - {order?.phone}
         </h1>
       </td>
 

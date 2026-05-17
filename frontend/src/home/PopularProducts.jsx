@@ -7,9 +7,10 @@ export default function PopularProducts() {
   const authValue = useContext(AuthContext);
   const { notify, theme } = authValue;
   const [products, setProducts] = useState([]);
+
   useEffect(() => {
     axios
-      .get("/data/products.json", {withCredentials: true})
+      .get("/data/products.json")
       .then((res) => setProducts(res?.data))
       .catch((err) => notify(`Error: ${err.message}...!!!`, "error"));
   }, [notify]);

@@ -23,7 +23,7 @@ app.use(
       "http://localhost:5173",
     ],
     credentials: true,
-  })
+  }),
 );
 
 const PORT = process.env.PORT || 5000;
@@ -45,12 +45,10 @@ const logger = (req, res, next) => {
   next();
 };
 
-
 // ==============   Verify Token  ============
 
 const verifyToken = async (req, res, next) => {
-  const token = req.cookies?.token;
-
+  const token = req?.cookies?.token;
   if (!token) {
     return res.status(401).send({ message: "in verify jwt, no token." });
   }
@@ -60,17 +58,12 @@ const verifyToken = async (req, res, next) => {
     process.env.ACCESS_SECRET_TOKEN,
     (err, decoded) => {
       if (err) {
-        console.log("Token Not Valid...!!!");
         return res.status(401).send({ message: "Not a valid token" });
       }
-
-      console.log("req.user.decoded", decoded);
       req.user = decoded;
-      console.log("TOken decoded", token);
       next();
-    }
+    },
   );
-  console.log("Verified", verify);
 };
 
 // ============   MongoDB  functions   ===========
@@ -84,7 +77,7 @@ async function run() {
     await client.connect();
     await client.db("admin").command({ ping: 1 });
     console.log(
-      "Pinged your deployment. You successfully connected to MongoDB!"
+      "Pinged your deployment. You successfully connected to MongoDB!",
     );
 
     const database = client.db("carDoctorDB");
@@ -93,19 +86,34 @@ async function run() {
 
     // ============ JWT =================
 
+    // ----     Set cookie with access token    ------------
     app.post("/jwt", logger, async (req, res) => {
       const user = req.body;
+      console.log("JWT user", user);
       const token = jwt.sign(user, process.env.ACCESS_SECRET_TOKEN, {
         expiresIn: 60 * 60,
       });
       res
         .cookie("token", token, {
           httpOnly: true,
-          secure: false,
-          sameSite: "lax",
+          secure: process.env.NODE_ENV === "production",
+          sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
         })
         .send({ success: true });
-      console.log("token in jwt", user, token);
+    });
+
+    // ============  Log Out    ==============
+    app.post("/logout", async (req, res) => {
+      const user = req.body;
+      console.log("Logging out user", user);
+
+      res
+        .clearCookie("token", {
+          maxAge: 0,
+          secure: process.env.NODE_ENV === "production",
+          sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+        })
+        .send({ success: true });
     });
 
     // ============  Services  ===============
@@ -141,49 +149,15 @@ async function run() {
 
     // ============  Cart Data  ===============
 
-    app.get("/cart/:uid", logger, verifyToken, async (req, res) => {
+    app.get("/cart", logger, verifyToken, async (req, res) => {
       try {
-        const { uid } = req.params;
-        console.log("cart", req.query.email, req.user.email);
-        if (req?.query?.email !== req?.user?.email) {
-          return res.status(403).send({ message: "Unauthorized Access...!!!" });
-        }
-        const result = await ordersCollection.find({ uid: uid }).toArray();
-        res.status(201).send(result);
+        const email = req.user.email;
+        const result = await ordersCollection.find({ email }).toArray();
+        res.status(200).send(result);
       } catch {
         (err) => console.error(err);
         res.status(400).json({ message: "Failed to fetch cart data...!!!" });
       }
-
-      // {
-      //   try {
-      //     const { id } = req.params;
-      //     const cartItems = await ordersCollection.find({ uid: id }).toArray();
-
-      //     const cartItemIdSet = new Set();
-
-      //     try {
-      //       cartItems.forEach((item) => {
-      //         if (item.serviceId) {
-      //           cartItemIdSet.add(new ObjectId(item.serviceId));
-      //         }
-      //       });
-      //     } catch {
-      //       console.error("Invalid service id found in the cart item.");
-      //     }
-
-      //     const cartItemIdArray = Array.from(cartItemIdSet);
-
-      //     const result = await servicesCollection
-      //       .find({ _id: { $in: cartItemIdArray } })
-      //       .toArray();
-
-      //     res.status(201).send(result);
-      //   } catch {
-      //     (err) => console.error(err);
-      //   }
-
-      // }
     });
 
     // =========== Delete Cart Item   =============
@@ -228,7 +202,7 @@ async function run() {
         if (uid === "68JNcuRz5Rhn9FSewm730fhaODo1") {
           const result = await ordersCollection.updateOne(
             { _id: new ObjectId(id) },
-            { $set: { approvalStatus: approvalStatus } }
+            { $set: { approvalStatus: approvalStatus } },
           );
           res.send(result);
         } else {

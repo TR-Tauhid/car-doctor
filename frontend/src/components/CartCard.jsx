@@ -1,6 +1,6 @@
 import { MdCancel } from "react-icons/md";
 import swal from "sweetalert";
-import axios from "axios";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 export default function CartCard({
   cartItem,
@@ -9,6 +9,8 @@ export default function CartCard({
   notify,
   deleteCartItem,
 }) {
+  const axiosSecure = useAxiosSecure();
+
   const handleCrossBtn = (cartItem) => {
     swal({
       title: "Are you sure...???",
@@ -22,11 +24,12 @@ export default function CartCard({
           icon: "success",
         });
 
-        axios
+        axiosSecure
           .delete(`http://localhost:5000/deleteCartItem/${user?.uid}`, {
             data: {
               id: cartItem?._id,
             },
+            
           })
           .then((res) => {
             deleteCartItem(cartItem?._id);

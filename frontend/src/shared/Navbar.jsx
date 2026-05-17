@@ -3,12 +3,13 @@ import { Link, NavLink } from "react-router";
 import AuthContext from "../context/AuthContext";
 import logoBlack from "/icons/logoBlack.svg";
 import logoWhite from "/icons/logoWhite.svg";
-import axios from "axios";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const Navbar = () => {
   const [profileImgError, setProfileImgError] = useState(false);
   const authValue = useContext(AuthContext);
   const { theme, user, notify, setTheme, logOut, cart, setCart } = authValue;
+  const axiosSecure = useAxiosSecure();
 
   let menuItem = (
     <>
@@ -106,11 +107,10 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    if (!user?.uid) {
-      return;
-    }
-    axios
-      .get(`http://localhost:5000/cart/${user?.uid}`)
+    axiosSecure
+      .get(`http://localhost:5000/cart`, {
+        
+      })
       .then((res) => {
         setCart(res?.data);
       })
@@ -124,7 +124,11 @@ const Navbar = () => {
       <div className="navbar px-0 md:px-4 justify-between">
         <div className="navbar-start justify-around md:justify-between md:w-auto md:mr-6">
           <div className="dropdown">
-            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden max-sm:p-0">
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn btn-ghost lg:hidden max-sm:p-0"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
@@ -163,7 +167,9 @@ const Navbar = () => {
           </div>
         ) : (
           <div className="hidden navbar-center lg:flex ">
-            <ul className="menu menu-horizontal min-[1440px]:gap-x-5">{menuItem}</ul>
+            <ul className="menu menu-horizontal min-[1440px]:gap-x-5">
+              {menuItem}
+            </ul>
           </div>
         )}
 
@@ -247,7 +253,7 @@ const Navbar = () => {
                   Subtotal: ${" "}
                   {cart.reduce(
                     (sum, item) => sum + parseFloat(item?.price || 0),
-                    0
+                    0,
                   )}{" "}
                 </span>
                 <div className="card-actions">

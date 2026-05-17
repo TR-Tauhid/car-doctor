@@ -1,4 +1,4 @@
-import axios from "axios";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 import { useContext, useEffect, useState } from "react";
 import AuthContext from "../context/AuthContext";
 import { Link, useParams } from "react-router";
@@ -13,15 +13,18 @@ const ServiceDetails = () => {
   const authValue = useContext(AuthContext);
   const { theme, notify } = authValue;
   const id = useParams();
+  const axiosSecure = useAxiosSecure();
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:5000/serviceDetails/${id?.id}`)
+    axiosSecure
+      .get(`http://localhost:5000/serviceDetails/${id?.id}`, {
+        
+      })
       .then((res) => setService(res.data))
       .catch((err) => notify(`Error: ${err.message}`, "error"));
 
-    axios
-      .get("http://localhost:5000/services")
+    axiosSecure
+      .get("http://localhost:5000/services", )
       .then((res) => {
         setServices(res.data);
       })

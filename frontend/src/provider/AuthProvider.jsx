@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import axios from "axios";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 import {
   createUserWithEmailAndPassword,
   FacebookAuthProvider,
@@ -18,10 +18,10 @@ import AuthContext from "../context/AuthContext";
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const axiosSecure = useAxiosSecure();
   const [loading, setLoading] = useState(true);
   const [theme, setTheme] = useState("");
   const [cart, setCart] = useState([]);
-  const [authChecked, setAuthChecked] = useState(false);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia(`("prefers-color-scheme: dark")`);
@@ -42,7 +42,7 @@ const AuthProvider = ({ children }) => {
         transition: Bounce,
       });
     },
-    [theme]
+    [theme],
   );
 
   const createUserWithEmail = (email, password) => {
@@ -82,27 +82,34 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      setAuthChecked(true);
-      setLoading(false);
 
-      const loggedUser = { email: user?.email };
-
+      // =====> Set JWT token to user
+      const loggedUser = { email: currentUser?.email };
       if (currentUser) {
-        axios
+        axiosSecure
           .post("http://localhost:5000/jwt", loggedUser, {
-            withCredentials: true,
+            
           })
-          .then((res) => console.log(res))
+          .then(() => {
+            setLoading(false);
+          })
           .catch((err) => {
             console.log(err);
             notify(err, "error");
+            setLoading(false);
+          });
+      } else {
+        axiosSecure
+          .post("http://localhost:5000/logout", {}, )
+          .then(() => setLoading(false))
+          .catch((err) => {
+            notify(err, "warning");
+            setLoading(false);
           });
       }
     });
-    return () => {
-      unsubscribe();
-    };
-  }, [notify, user]);
+    return () => unsubscribe();
+  }, [notify]);
 
   const logOut = () => {
     return signOut(auth);
@@ -112,7 +119,6 @@ const AuthProvider = ({ children }) => {
     cart,
     theme,
     loading,
-    authChecked,
     notify,
     logOut,
     setCart,
