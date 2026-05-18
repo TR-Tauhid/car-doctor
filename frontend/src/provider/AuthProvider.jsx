@@ -17,7 +17,7 @@ import { Bounce, toast } from "react-toastify";
 import AuthContext from "../context/AuthContext";
 
 const authAxios = axios.create({
-  baseURL: "http://localhost:5000", // Change this to your environment variable if you have one e.g., import.meta.env.VITE_API_URL
+  baseURL: import.meta.env.VITE_BASE_URL,
   withCredentials: true,
 });
 
