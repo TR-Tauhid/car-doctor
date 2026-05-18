@@ -49,6 +49,7 @@ const logger = (req, res, next) => {
 
 const verifyToken = async (req, res, next) => {
   const token = req?.cookies?.token;
+  console.log(token);
   if (!token) {
     return res.status(401).send({ message: "in verify jwt, no token." });
   }
@@ -98,6 +99,7 @@ async function run() {
           httpOnly: true,
           secure: process.env.NODE_ENV === "production",
           sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+          maxAge: 60 * 60 * 1000, 
         })
         .send({ success: true });
     });
@@ -130,7 +132,7 @@ async function run() {
 
     // ===========  Service Details   =============
 
-    app.get("/serviceDetails/:id", async (req, res) => {
+    app.get("/serviceDetails/:id", verifyToken, async (req, res) => {
       try {
         const { id } = req.params;
         const result = await servicesCollection.findOne({
@@ -162,7 +164,7 @@ async function run() {
 
     // =========== Delete Cart Item   =============
 
-    app.delete("/deleteCartItem/:uid", async (req, res) => {
+    app.delete("/deleteCartItem/:uid", verifyToken, async (req, res) => {
       const { uid } = req.params;
       const { id } = req.body;
       const result = await ordersCollection.deleteOne({
@@ -174,7 +176,7 @@ async function run() {
 
     // =========== Delete All Cart Data   =================
 
-    app.delete("/delete-cart/:uid", async (req, res) => {
+    app.delete("/delete-cart/:uid", verifyToken, async (req, res) => {
       try {
         const { uid } = req.params;
         const result = await ordersCollection.deleteMany({ uid: uid });
@@ -186,7 +188,7 @@ async function run() {
 
     // ===========  Manage Orders   ==============
 
-    app.get("/getOrders", async (req, res) => {
+    app.get("/getOrders", verifyToken, async (req, res) => {
       try {
         const result = await ordersCollection.find({}).toArray();
         res.status(201).send(result);
@@ -195,7 +197,7 @@ async function run() {
       }
     });
 
-    app.patch("/manageOrders/:uid", async (req, res) => {
+    app.patch("/manageOrders/:uid", verifyToken, async (req, res) => {
       try {
         const { uid } = req.params;
         const { id, approvalStatus } = req.body;
@@ -217,7 +219,7 @@ async function run() {
 
     // ============  Add Service  ===============
 
-    app.post("/addService", async (req, res) => {
+    app.post("/addService", verifyToken, async (req, res) => {
       try {
         const serviceData = req.body.data;
         const result = await servicesCollection.insertOne(serviceData);
@@ -233,7 +235,7 @@ async function run() {
 
     // ============  Add Order  ===============
 
-    app.post("/order", async (req, res) => {
+    app.post("/order", verifyToken, async (req, res) => {
       try {
         const orderedData = req.body;
         const result = await database
@@ -249,7 +251,7 @@ async function run() {
       }
     });
 
-    app.get("/checkout/:id", async (req, res) => {
+    app.get("/checkout/:id", verifyToken, async (req, res) => {
       try {
         const { id } = req.params;
         const result = await servicesCollection.findOne({

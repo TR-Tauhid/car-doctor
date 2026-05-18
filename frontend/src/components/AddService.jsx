@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import AuthContext from "../context/AuthContext";
+import useAuth from "../hooks/useAuth";
 import { Helmet } from "react-helmet-async";
 
 export default function AddService() {
-  const authValue = useContext(AuthContext);
+  const authValue = useAuth();
   const { theme, notify } = authValue;
   const axiosSecure = useAxiosSecure();
 
@@ -54,7 +54,7 @@ export default function AddService() {
       facilities: serviceFacilities.facility,
     };
     axiosSecure
-      .post("http://localhost:5000/addService", {
+      .post("/addService", {
         data: data,
       })
       .then((res) => {

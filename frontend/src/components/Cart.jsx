@@ -1,19 +1,21 @@
 import { MdArrowBack, MdDelete } from "react-icons/md";
-import React, { useContext, useEffect } from "react";
+import React, {  useEffect } from "react";
 import AuthContext from "../context/AuthContext";
 import { Link } from "react-router";
 import CartCard from "./CartCard";
 import swal from "sweetalert";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import useAuth from "../hooks/useAuth";
+
 
 export default function Cart() {
-  const authValue = useContext(AuthContext);
+  const authValue = useAuth();
   const { user, notify, theme, cart, setCart } = authValue;
   const axiosSecure = useAxiosSecure();
 
   useEffect(() => {
     axiosSecure
-      .get(`http://localhost:5000/cart`, {
+      .get(`/cart`, {
         
       })
       .catch((err) => {
@@ -39,7 +41,7 @@ export default function Cart() {
           icon: "success",
         });
         axiosSecure
-          .delete(`http://localhost:5000/delete-cart/${user?.uid}`, {
+          .delete(`/delete-cart/${user?.uid}`, {
             
           })
           .then((res) => {

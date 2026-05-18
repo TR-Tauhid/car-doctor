@@ -1,13 +1,13 @@
-import React, { useContext } from "react";
 import AuthContext from "../context/AuthContext";
 import logoWhite from "/icons/logoWhite.svg";
 import logoBlack from "/icons/logoBlack.svg";
 import { FaGoogle, FaInstagram, FaLinkedin } from "react-icons/fa";
 import { AiFillTwitterCircle } from "react-icons/ai";
+import useAuth from "../hooks/useAuth";
 import { Link } from "react-router";
 
 export default function Footer() {
-  const authValue = useContext(AuthContext);
+  const authValue = useAuth();
   const { theme } = authValue;
   return (
     <div>

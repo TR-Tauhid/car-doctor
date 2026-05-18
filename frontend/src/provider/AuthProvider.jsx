@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import useAxiosSecure from "../hooks/useAxiosSecure";
+import axios from "axios";
 import {
   createUserWithEmailAndPassword,
   FacebookAuthProvider,
@@ -16,9 +16,13 @@ import { Bounce, toast } from "react-toastify";
 
 import AuthContext from "../context/AuthContext";
 
+const authAxios = axios.create({
+  baseURL: "http://localhost:5000", // Change this to your environment variable if you have one e.g., import.meta.env.VITE_API_URL
+  withCredentials: true,
+});
+
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const axiosSecure = useAxiosSecure();
   const [loading, setLoading] = useState(true);
   const [theme, setTheme] = useState("");
   const [cart, setCart] = useState([]);
@@ -86,8 +90,8 @@ const AuthProvider = ({ children }) => {
       // =====> Set JWT token to user
       const loggedUser = { email: currentUser?.email };
       if (currentUser) {
-        axiosSecure
-          .post("http://localhost:5000/jwt", loggedUser, {
+        authAxios
+          .post("/jwt", loggedUser, {
             
           })
           .then(() => {
@@ -95,15 +99,15 @@ const AuthProvider = ({ children }) => {
           })
           .catch((err) => {
             console.log(err);
-            notify(err, "error");
+            notify(err.message, "error");
             setLoading(false);
           });
       } else {
-        axiosSecure
-          .post("http://localhost:5000/logout", {}, )
+        authAxios
+          .post("/logout", {}, )
           .then(() => setLoading(false))
           .catch((err) => {
-            notify(err, "warning");
+            notify(err.message, "warning");
             setLoading(false);
           });
       }

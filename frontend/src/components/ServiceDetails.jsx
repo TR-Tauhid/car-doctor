@@ -1,30 +1,31 @@
 import useAxiosSecure from "../hooks/useAxiosSecure";
-import { useContext, useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import AuthContext from "../context/AuthContext";
 import { Link, useParams } from "react-router";
 import document from "/icons/document.svg";
 import arrow from "/icons/arrow.svg";
 import logoWhite from "/icons/logoWhite.svg";
 import logoBlack from "/icons/logoBlack.svg";
+import useAuth from "../hooks/useAuth";
 
 const ServiceDetails = () => {
   const [service, setService] = useState([]);
   const [services, setServices] = useState([]);
-  const authValue = useContext(AuthContext);
+  const authValue = useAuth();
   const { theme, notify } = authValue;
   const id = useParams();
   const axiosSecure = useAxiosSecure();
 
   useEffect(() => {
     axiosSecure
-      .get(`http://localhost:5000/serviceDetails/${id?.id}`, {
+      .get(`/serviceDetails/${id?.id}`, {
         
       })
       .then((res) => setService(res.data))
       .catch((err) => notify(`Error: ${err.message}`, "error"));
 
     axiosSecure
-      .get("http://localhost:5000/services", )
+      .get("/services", {withCredentials: false} )
       .then((res) => {
         setServices(res.data);
       })

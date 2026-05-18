@@ -1,5 +1,5 @@
-import { useContext } from "react";
 import AuthContext from "../context/AuthContext";
+import useAuth from "../hooks/useAuth";
 import {
   FaFacebookF,
   FaInstagram,
@@ -12,7 +12,7 @@ import "swiper/css/pagination";
 import { FreeMode, Navigation, Pagination } from "swiper/modules";
 
 export default function Team() {
-  const authValue = useContext(AuthContext);
+  const authValue = useAuth();
   const { theme } = authValue;
 
   return (

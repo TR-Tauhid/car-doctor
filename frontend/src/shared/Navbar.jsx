@@ -1,14 +1,14 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router";
-import AuthContext from "../context/AuthContext";
 import logoBlack from "/icons/logoBlack.svg";
 import logoWhite from "/icons/logoWhite.svg";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import useAuth from "../hooks/useAuth";
 
 const Navbar = () => {
   const [profileImgError, setProfileImgError] = useState(false);
-  const authValue = useContext(AuthContext);
-  const { theme, user, notify, setTheme, logOut, cart, setCart } = authValue;
+  const authValue = useAuth();
+  const { theme, user, loading, notify, setTheme, logOut, cart, setCart } = authValue;
   const axiosSecure = useAxiosSecure();
 
   let menuItem = (
@@ -107,17 +107,19 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    axiosSecure
-      .get(`http://localhost:5000/cart`, {
-        
-      })
-      .then((res) => {
-        setCart(res?.data);
-      })
-      .catch((err) => {
-        notify(`Error: ${err.response.data.message}`, "error");
-      });
-  }, [user, notify, setCart]);
+    if (user && !loading) {
+      axiosSecure
+        .get(`/cart`)
+        .then((res) => {
+          setCart(res?.data || []);
+        })
+        .catch((err) => {
+          notify(`Error: ${err.response?.data?.message || err.message}`, "error");
+        });
+    } else if (!user) {
+      setCart([]);
+    }
+  }, [user, loading, notify, setCart, axiosSecure]);
 
   return (
     <div className="my-6 w-11/12 mx-auto">
@@ -236,7 +238,7 @@ const Navbar = () => {
                       : "bg-black text-white"
                   }`}
                 >
-                  {cart?.length}
+                  {cart?.length || 0}
                 </span>
               </div>
             </div>
@@ -247,14 +249,14 @@ const Navbar = () => {
             >
               <div className="card-body bg-blur rounded-xl border border-white">
                 <span className="text-lg font-bold">
-                  {cart?.length} Item(s)
+                  {cart?.length || 0} Item(s)
                 </span>
                 <span className="font-medium">
                   Subtotal: ${" "}
-                  {cart.reduce(
+                  {cart?.reduce(
                     (sum, item) => sum + parseFloat(item?.price || 0),
                     0,
-                  )}{" "}
+                  ) || 0}{" "}
                 </span>
                 <div className="card-actions">
                   <Link to={`/cart/${user?.uid}`}>

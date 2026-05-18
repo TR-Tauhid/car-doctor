@@ -1,10 +1,11 @@
-import { useContext, useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import ProductCard from "../components/ProductCard";
 import AuthContext from "../context/AuthContext";
 import axios from "axios";
+import useAuth from "../hooks/useAuth";
 
 export default function PopularProducts() {
-  const authValue = useContext(AuthContext);
+  const authValue = useAuth();
   const { notify, theme } = authValue;
   const [products, setProducts] = useState([]);
 

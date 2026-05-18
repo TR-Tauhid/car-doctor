@@ -25,7 +25,7 @@ export default function CartCard({
         });
 
         axiosSecure
-          .delete(`http://localhost:5000/deleteCartItem/${user?.uid}`, {
+          .delete(`/deleteCartItem/${user?.uid}`, {
             data: {
               id: cartItem?._id,
             },

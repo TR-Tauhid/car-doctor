@@ -1,18 +1,19 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, {  useEffect, useState } from "react";
 import AuthContext from "../context/AuthContext";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import { Helmet } from "react-helmet-async";
 import ManageOrdersCard from "./ManageOrdersCard";
+import useAuth from "../hooks/useAuth";
 
 export default function ManageOrders() {
-  const authValue = useContext(AuthContext);
+  const authValue = useAuth();
   const { notify, user, theme } = authValue;
   const axiosSecure = useAxiosSecure();
   const [orders, setOrders] = useState();
 
   useEffect(() => {
     axiosSecure
-      .get("http://localhost:5000/getOrders", )
+      .get("/getOrders", )
       .then((res) => setOrders(res.data))
       .catch(() => notify("Faild to fetch order data...!!!", "error"));
   }, [notify]);

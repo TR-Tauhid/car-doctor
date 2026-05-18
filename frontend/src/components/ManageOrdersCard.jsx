@@ -1,10 +1,11 @@
 import useAxiosSecure from "../hooks/useAxiosSecure";
-import { useContext, useState } from "react";
+import {  useState } from "react";
 import { MdCheckCircle } from "react-icons/md";
 import AuthContext from "../context/AuthContext";
+import useAuth from "../hooks/useAuth";
 
 export default function ManageOrdersCard({ order }) {
-  const authValue = useContext(AuthContext);
+  const authValue = useAuth();
   const axiosSecure = useAxiosSecure();
 
   const { user, theme, notify } = authValue;
@@ -17,7 +18,7 @@ export default function ManageOrdersCard({ order }) {
     setCurrentApprovalStatus(approvalStatus);
 
     axiosSecure
-      .patch(`http://localhost:5000/manageOrders/${user?.uid}`, {
+      .patch(`/manageOrders/${user?.uid}`, {
         id: order?._id,
         approvalStatus: approvalStatus,
         

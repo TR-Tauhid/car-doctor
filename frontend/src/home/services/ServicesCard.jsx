@@ -1,18 +1,19 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import Loading from "../../components/Loading";
 import AuthContext from "../../context/AuthContext";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useAuth from "../../hooks/useAuth";
 
 export default function ServicesCard() {
-  const authValue = useContext(AuthContext);
+  const authValue = useAuth();
   const { theme, notify } = authValue;
   const [services, setServices] = useState([]);
   const axiosSecure = useAxiosSecure();
 
   useEffect(() => {
     axiosSecure
-      .get("http://localhost:5000/services")
+      .get("/services",)
       .then((res) => {
         setServices(res.data);
       })

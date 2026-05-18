@@ -1,14 +1,16 @@
-import React, { useContext, useState } from "react";
+import React, {  useState } from "react";
 import AuthContext from "../context/AuthContext";
 import { Link, useLocation, useNavigate } from "react-router";
 import eye from "/icons/eye.svg";
 import eyeClose from "/icons/eye-close.svg";
 import loginSVG from "/images/login/login.svg";
 import { Helmet } from "react-helmet-async";
+import useAuth from "../hooks/useAuth";
 
 export default function Login() {
   const [toggleEye, setToggleEye] = useState(true);
-  const authValue = useContext(AuthContext);
+
+  const authValue = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const {
@@ -31,7 +33,6 @@ export default function Login() {
     logInWithEmailPass(email, password)
       .then((res) => {
         if (res.user) {
-
           navigate(location?.state ? location.state.from : "/");
           notify(`Welcome ${res?.user?.displayName}...!!!`, "success");
         }
@@ -42,8 +43,8 @@ export default function Login() {
   const handleGoogleBtn = () => {
     googleLogIn()
       .then((res) => {
-        if (res.user) {
-          console.log(res.data);
+        if (res?.user) {
+          console.log(res?.data);
           navigate(location?.state ? location.state.from : "/");
           notify(`Welcome ${res?.user?.displayName}...!!!`, "success");
         }

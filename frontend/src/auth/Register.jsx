@@ -1,13 +1,14 @@
-import React, { useContext, useState } from "react";
+import React, {  useState } from "react";
 import AuthContext from "../context/AuthContext";
 import { Link, useLocation, useNavigate } from "react-router";
 import { updateProfile } from "firebase/auth";
 import eye from "/icons/eye.svg";
 import loginSVG from "/images/login/login.svg";
 import eyeClose from "/icons/eye-close.svg";
+import useAuth from "../hooks/useAuth";
 import { Helmet } from "react-helmet-async";
 export default function Register() {
-  const authValue = useContext(AuthContext);
+  const authValue = useAuth();
   const [toggleEye, setToggleEye] = useState(true);
   const { notify, theme, createUserWithEmail } = authValue;
   const location = useLocation();

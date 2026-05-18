@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import AboutCard from "./AboutCard";
 import Banner from "./Banner";
 import Loading from "../components/Loading";
@@ -8,11 +7,12 @@ import PopularProducts from "./PopularProducts";
 import Team from "../components/Team";
 import Features from "../components/Features";
 import Testimonial from "../components/Testimonial";
+import useAuth from "../hooks/useAuth";
 import { Helmet } from "react-helmet-async";
 import ServicesCard from "./services/ServicesCard";
 
 export default function Home() {
-  const authValue = useContext(AuthContext);
+  const authValue = useAuth();
   const { loading, theme } = authValue;
 
   if (loading) {

@@ -1,10 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import { useNavigate, useParams } from "react-router";
 import AuthContext from "../context/AuthContext";
+import useAuth from "../hooks/useAuth";
 
 export default function Checkout() {
-  const authValue = useContext(AuthContext);
+  const authValue = useAuth();
   const { notify, user, theme } = authValue;
   const [service, setService] = useState([]);
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ export default function Checkout() {
 
   useEffect(() => {
     axiosSecure
-      .get(`http://localhost:5000/serviceDetails/${id?.id}`, {
+      .get(`/serviceDetails/${id?.id}`, {
         
       })
       .then((res) => setService(res.data))
@@ -52,7 +53,7 @@ export default function Checkout() {
     };
 
     axiosSecure
-      .post("http://localhost:5000/order", orderData, )
+      .post("/order", orderData, )
       .then((res) => {
         if (res.statusText === "Created") {
           notify(
