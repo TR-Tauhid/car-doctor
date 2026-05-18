@@ -19,6 +19,7 @@ app.use(
   cors({
     origin: [
       "https://car-doctor-12fbd.firebaseapp.com",
+      "https://tauhids-car-doctor.vercel.app",
       "https://car-doctor-12fbd.web.app",
       "http://localhost:5173",
     ],
